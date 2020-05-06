@@ -1,0 +1,6 @@
+Modul yang sdh diinstal:
+- express
+- mysql
+- multer
+- ejs
+- dotenv

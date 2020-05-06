@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .hOptions{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: black;
+            font-size: x-large;
+            float: left;
+            padding-top: 65px;
+            padding-left: 100px;
+        }
+        .hOptions:hover{
+            text-decoration: underline;
+            color: wheat;
+        }
+        div{
+            margin: auto;
+        }
+        body{
+            margin:0px;
+            background-image: url(http://localhost:3000/background.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+    <script src="jQuery.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="header" style="background-color: white; overflow: auto;">
+        <img src="http://localhost:3000/logo.png" style="width: 25%; height:25%; padding: 20px; float:left;">
+        <span class="hOptions" style="padding-left: 400px;" onclick="toHome()">Home</span>
+        <span class="hOptions" onclick="toDocs()">Docs</span>
+        <span class="hOptions" onclick="toLogin()">Login</span>
+    </div>
+    <div id="body" style="width:50%; margin:auto; background-color: antiquewhite; opacity: 75%;">
+        <h1>Homepage</h1>
+    </div>
+</body>
+</html>
+<script>
+    function toHome(){
+        window.location = "./";
+    }
+    function toDocs(){
+        window.location = "./docs";
+    }
+    function toLogin(){
+        window.location = "./login";
+    }
+</script>
