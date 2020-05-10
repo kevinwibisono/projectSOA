@@ -1,5 +1,10 @@
 const express = require('express');
 const app = express();
+
+app.use(express.urlencoded({extended:true}));
+app.use(express.static("uploads"));
+require('dotenv').config();
+
 const { Client } = require('pg');
 
 const client = new Client({
@@ -7,31 +12,14 @@ const client = new Client({
   ssl: true,
 });
 
-app.use(express.urlencoded({extended:true}));
-app.use(express.static("uploads"));
-require('dotenv').config();
+client.connect();
 
-function executeQuery(query){
-    return new Promise(function(resolve, reject){
-        client.connect();
-
-        client.query(query, (err, res) => {
-            if (err){
-                client.end();
-                reject(err);
-            } 
-            else{
-                client.end();
-                console.log(res);
-                resolve(res);
-            }        
-        });
-    })
-}
-
-app.get("/", async function(req, res){
-    var result = await executeQuery("SELECT table_schema,table_name FROM information_schema.tables;");
-    res.send(result);
+client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(JSON.stringify(row));
+  }
+  client.end();
 });
 
 app.listen(process.env.PORT, function(){
