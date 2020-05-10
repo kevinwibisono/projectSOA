@@ -12,22 +12,25 @@ app.use(express.static("uploads"));
 require('dotenv').config();
 
 function executeQuery(query){
-    client.connect();
+    return new Promise(function(resolve, reject){
+        client.connect();
 
-    client.query(query, (err, res) => {
-        if (err){
-            client.end();
-            throw err;
-        } 
-        else{
-            client.end();
-            return res;
-        }        
-    });
+        client.query(query, (err, res) => {
+            if (err){
+                client.end();
+                reject(err);
+            } 
+            else{
+                client.end();
+                console.log(res);
+                resolve(res);
+            }        
+        });
+    })
 }
 
-app.get("/", function(req, res){
-    var result = executeQuery("SELECT table_schema,table_name FROM information_schema.tables;");
+app.get("/", async function(req, res){
+    var result = await executeQuery("SELECT table_schema,table_name FROM information_schema.tables;");
     res.send(result);
 });
 
