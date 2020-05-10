@@ -1,0 +1,35 @@
+CREATE TABLE collection (
+  id serial PRIMARY KEY NOT NULL,
+  username varchar(30) NOT NULL,
+  collection_name varchar(30) NOT NULL,
+  collection_desc varchar(10000) NOT NULL
+);
+
+CREATE TABLE collection_item (
+  collection_id integer NOT NULL,
+  resto_id integer NOT NULL
+);
+
+CREATE TABLE favorite (
+  favorite_id serial PRIMARY KEY NOT NULL,
+  collection_id integer NOT NULL,
+  username varchar(30) NOT NULL
+);
+
+CREATE TABLE review (
+  id serial PRIMARY KEY NOT NULL,
+  username varchar(30) NOT NULL,
+  resto_id integer NOT NULL,
+  review varchar(10000) NOT NULL
+);
+
+CREATE TABLE usertable (
+  username varchar(30) PRIMARY KEY NOT NULL,
+  password varchar(30) NOT NULL,
+  nama varchar(30) NOT NULL,
+  picture varchar(30) NOT NULL,
+  apiKey varchar(30) NOT NULL,
+  tipe integer NOT NULL,
+  saldo integer NOT NULL,
+  apiHit integer NOT NULL
+);

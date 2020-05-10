@@ -4,3 +4,4 @@ Modul yang sdh diinstal:
 - multer
 - ejs
 - dotenv
+- pg (postgre)
