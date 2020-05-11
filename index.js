@@ -12,17 +12,15 @@ const client = new Client({
   ssl: {rejectUnauthorized: false},
 });
 
+client.connect();
+
 function executeQuery(query){
   return new Promise(function(resolve, reject){
-    client.connect();
-
     client.query(query, (err, res) => {
-      if (err) reject(err);
+      if(err) reject(err);
       else resolve(res.rows);
-      client.end();
     });
   });
-  
 }
 
 app.get("/", async function(req, res){
