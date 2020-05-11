@@ -12,12 +12,22 @@ const client = new Client({
   ssl: {rejectUnauthorized: false},
 });
 
-client.connect();
+function executeQuery(query){
+  return new Promise(function(resolve, reject){
+    client.connect();
 
-client.query('SELECT * FROM usertable', (err, res) => {
-  if (err) throw err;
-  else console.log(res.rows);
-  client.end();
+    client.query(query, (err, res) => {
+      if (err) reject(err);
+      else resolve(res.rows);
+      client.end();
+    });
+  });
+  
+}
+
+app.get("/", async function(req, res){
+  var result = await executeQuery('SELECT * FROM usertable');
+  res.send(result);
 });
 
 app.listen(process.env.PORT, function(){
