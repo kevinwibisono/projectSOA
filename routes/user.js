@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+require('dotenv').config();
 
 const { Client } = require('pg');
 
@@ -50,6 +51,24 @@ router.get("/getUser", async function(req, res){
         }
     }
     
+});
+
+router.delete('/deleteUser', async function(req, res) {
+    let cari = await executeQuery(`SELECT * FROM usertable WHERE apikey = '${req.query.apiKey}'`);
+    if(cari.length > 0){
+        if(cari[0].tipe == 0){
+            let hapus = await executeQuery(`DELETE FROM usertable WHERE username = '${req.body.username}'`);
+            res.send(hapus);
+        }
+        else{
+            let carilagi = await executeQuery(`SELECT * FROM usertable WHERE apikey = '${req.query.apiKey}' and username = '${req.body.username}'`);
+            if(carilagi.length > 0){
+                let hapus = await executeQuery(`DELETE FROM usertable WHERE username = '${req.body.username}'`);
+                res.send(hapus);
+            }
+            else res.status(401).send("User tidak memiliki hak akses untuk menghapus user lain!");
+        }
+    }else res.status(404).send("User tidak ditemukan!");
 });
 
 process.on("exit", function(){
