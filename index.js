@@ -14,29 +14,6 @@ app.use('/api/resto', resto);
 
 require('dotenv').config();
 
-const { Client } = require('pg');
-
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {rejectUnauthorized: false},
-});
-
-client.connect();
-
-function executeQuery(query){
-  return new Promise(function(resolve, reject){
-    client.query(query, (err, res) => {
-      if(err) reject(err);
-      else resolve(res.rows);
-    });
-  });
-}
-
-app.get("/", async function(req, res){
-  var result = await executeQuery('SELECT * FROM usertable');
-  res.send(result);
-});
-
-app.listen(process.env.PORT, function(){
-    console.log(`listening port ${process.env.PORT}`);
+app.listen(3000, function(){
+    console.log(`listening port 3000...`);
 });
