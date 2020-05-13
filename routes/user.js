@@ -20,37 +20,31 @@ function executeQuery(query){
 }
 
 router.get("/getUser", async function(req, res){
-    if(req.query.apiKey == undefined){
-        res.status(401).send("APIKey not found. You are not authorized");
-    }
-    else{
-        let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
-        if(result.length > 0){
-            if(result[0].tipe == 2){
-                let query = "";
-                if(req.query.username == undefined){
-                    query = "SELECT * FROM usertable";
-                }
-                else{
-                    query = `SELECT * FROM usertable where username = '${req.query.username}'`;
-                }
-                let result = await executeQuery(query);
-                if(result.length > 0){
-                    res.status(200).send(result);
-                }
-                else{
-                    res.status(404).send("No user found");
-                }
+    let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+    if(result.length > 0){
+        if(result[0].tipe == 2){
+            let query = "";
+            if(req.query.username == undefined){
+                query = "SELECT * FROM usertable";
             }
             else{
-                res.status(401).send("Only admin has access to this page");
+                query = `SELECT * FROM usertable where username = '${req.query.username}'`;
+            }
+            let result = await executeQuery(query);
+            if(result.length > 0){
+                res.status(200).send(result);
+            }
+            else{
+                res.status(404).send("No user found");
             }
         }
         else{
-            res.status(401).send("APIKey not registered in any user. You are not authorized");
+            res.status(401).send("Hanya admin yang memiliki hak akses terhadap halaman ini");
         }
     }
-    
+    else{
+        res.status(401).send("Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid");
+    }    
 });
 
 router.delete('/deleteUser', async function(req, res) {
@@ -69,6 +63,37 @@ router.delete('/deleteUser', async function(req, res) {
             else res.status(401).send("User tidak memiliki hak akses untuk menghapus user lain!");
         }
     }else res.status(404).send("User tidak ditemukan!");
+});
+
+router.put("/getPremium", async function(req, res){
+    let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+        if(result.length > 0){
+            let result = await executeQuery(`SELECT * FROM usertable where username = '${req.query.username}' and apiKey = '${req.query.apiKey}'`);
+            if(result.length > 0){
+                if(result[0].tipe == 0){
+                    //free user
+                    var nama = result[0].nama;
+                    var saldo = result[0].saldo;
+                    if(result[0].saldo >= 100000){
+                        saldo = saldo - 100000;
+                        let result = await executeQuery(`UPDATE usertable SET tipe = 1, apihit = 10000, saldo = saldo-100000 where username='${req.query.username}' and apiKey = '${req.query.apiKey}'`);
+                        res.status(200).send(`Akun user ${nama} telah diupgrade menjadi premium dan penggunaan api telah ditambahkan. Saldo anda sekarang ${saldo}`);
+                    }
+                    else{
+                        res.status(400).send("Saldo anda tidak mencukupi, silahkan akses endpoint /api/user/topup untuk pengisian");
+                    }
+                }
+                else{
+                    res.status(400).send("PERINGATAN! Akun bukan merupakan akun free, mengakses halaman ini tidak akan memberikan efek pada akun anda");
+                }
+            }
+            else{
+                res.status(400).send("Username tidak sesuai");
+            }
+        }
+        else{
+            res.status(401).send("Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid");
+        }
 });
 
 process.on("exit", function(){
