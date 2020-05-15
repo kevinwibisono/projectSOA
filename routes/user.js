@@ -35,11 +35,11 @@ router.get("/getUser", async function(req, res){
                 res.status(200).send(result);
             }
             else{
-                res.status(404).send("No user found");
+                res.status(404).send("Data user tidak ditemukan");
             }
         }
         else{
-            res.status(401).send("Hanya admin yang memiliki hak akses terhadap halaman ini");
+            res.status(401).send("Akun anda bukan merupakan akun administrator, anda tidak diijinkan mengakses halaman ini");
         }
     }
     else{
@@ -80,11 +80,11 @@ router.put("/getPremium", async function(req, res){
                         res.status(200).send(`Akun user ${nama} telah diupgrade menjadi premium dan penggunaan api telah ditambahkan. Saldo anda sekarang ${saldo}`);
                     }
                     else{
-                        res.status(400).send("Saldo anda tidak mencukupi, silahkan akses endpoint /api/user/topup untuk pengisian");
+                        res.status(400).send("Saldo anda tidak mencukupi, silahkan akses halaman /api/user/topup untuk pengisian");
                     }
                 }
                 else{
-                    res.status(400).send("PERINGATAN! Akun bukan merupakan akun free, mengakses halaman ini tidak akan memberikan efek pada akun anda");
+                    res.status(400).send("Akun bukan merupakan akun free, mengakses halaman ini tidak akan memberikan efek pada akun anda");
                 }
             }
             else{

@@ -2,7 +2,8 @@ CREATE TABLE collection (
   id serial PRIMARY KEY NOT NULL,
   username varchar(30) NOT NULL,
   collection_name varchar(30) NOT NULL,
-  collection_desc varchar(10000) NOT NULL
+  collection_desc varchar(10000) NOT NULL,
+  city_id integer NOT NULL
 );
 
 CREATE TABLE collection_item (
