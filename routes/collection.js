@@ -65,7 +65,7 @@ router.post("/addCollection", async function(req, res){
             else{
                 let cityname = await getCityName(req.body.cityId);
                 if(cityname == undefined){
-                    res.status(404).send("Tidak ditemukan resto dengan id tersebut, silahkan kunjungi endpoint /searchResto untuk mengetahui list restoran");
+                    res.status(404).send("Tidak ditemukan kota dengan id tersebut, silahkan kunjungi endpoint /getLocations untuk mengetahui list kota");
                 }
                 else{
                     let listresto = req.body.restoIds.toString().split(",");
@@ -83,7 +83,7 @@ router.post("/addCollection", async function(req, res){
                     }
                     if(allRestoValid){
                         //semua resto ada di dlm zomato api
-                        await executeQuery(`INSERT INTO collection(username, collection_name, collection_desc, city_id) VALUES('${username}', '${req.body.collectionName}', '${req.body.collectionDescription}', ${req.body.cityId})`);
+                        await executeQuery(`INSERT INTO collection(username, collection_name, collection_desc, city_id, resto_ids) VALUES('${username}', '${req.body.collectionName}', '${req.body.collectionDescription}', ${req.body.cityId}, '${req.body.restoIds}')`);
                         res.status(200).send(`Pembuatan collection ${req.body.collectionName} oleh user ${nama} berhasil dilakukan`);
                     }
                     else{
@@ -94,6 +94,65 @@ router.post("/addCollection", async function(req, res){
         }
         else{
             res.status(400).send("Akun anda bukan merupakan akun premium, anda tidak diijinkan mengakses halaman ini")
+        }
+    }
+    else{
+        res.status(401).send("Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid");
+    }
+});
+
+router.put("/updateCollection", async function(req, res){
+    let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+    if(result.length > 0){
+        const username = result[0].username;
+        if(req.query.collectionId){
+            let idresult = await executeQuery(`SELECT * FROM collection where id = ${req.query.collectionId}`);
+            if(idresult.length > 0){
+                let userresult = await executeQuery(`SELECT * FROM collection where id = ${req.query.collectionId} and username = '${username}'`);
+                if(userresult.length > 0){
+                    if(req.body.collectionName == "" || req.body.collectionDescription == ""|| req.body.restoIds == "" || req.body.cityId == ""){
+                        res.status(400).send("Seluruh field harus diisi");
+                    }
+                    else{
+                        let cityname = await getCityName(req.body.cityId);
+                        if(cityname == undefined){
+                            res.status(404).send("Tidak ditemukan kota dengan id tersebut, silahkan kunjungi endpoint /getLocations untuk mengetahui list kota");
+                        }
+                        else{
+                            let listresto = req.body.restoIds.toString().split(",");
+                            let allRestoValid = true;
+                            for (let index = 0; index < listresto.length; index++) {
+                                const resto = await getResto(listresto[index]);
+                                if(resto.name == undefined){
+                                    allRestoValid = false;
+                                }
+                                else{
+                                    if(resto.location.city_id != req.body.cityId){
+                                        allRestoValid = false;
+                                    }
+                                }                    
+                            }
+                            if(allRestoValid){
+                                //semua resto ada di dlm zomato api
+                                await executeQuery(`UPDATE collection set collection_name = '${req.body.collectionName}' , collection_desc = '${req.body.collectionDescription}', city_id = ${req.body.cityId}, resto_ids = '${req.body.restoIds}' where id = ${req.query.collectionId}`);
+                                res.status(200).send(`Collection ${req.body.collectionName} berhasil diubah`);
+                            }
+                            else{
+                                res.status(404).send("Resto id yang diinputkan invalid, tidak ditemukan atau bukan merupakan resto di kota tersebut");
+                            }
+                        }
+                    }
+                }
+                else{
+                    res.status(400).send(`Collection hanya boleh diedit oleh pemiliki collection`);
+                }
+            }
+            else{
+                res.status(404).send(`Tidak ditemukan collection dengan id ${req.query.collectionId}`);
+            }
+        }
+        else{
+            res.status(404).send("Pada halaman ini harus disertakan id dari collection yang ingin di-edit");
         }
     }
     else{

@@ -6,11 +6,6 @@ CREATE TABLE collection (
   city_id integer NOT NULL
 );
 
-CREATE TABLE collection_item (
-  collection_id integer NOT NULL,
-  resto_id integer NOT NULL
-);
-
 CREATE TABLE favorite (
   favorite_id serial PRIMARY KEY NOT NULL,
   collection_id integer NOT NULL,
