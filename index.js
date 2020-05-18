@@ -5,6 +5,7 @@ const review = require('./routes/review');
 const collection = require('./routes/collection');
 // const resto = require('./routes/resto');
 
+app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static("uploads"));
 app.use('/api/user', user);
