@@ -144,7 +144,7 @@ router.put("/updateCollection", async function(req, res){
                     }
                 }
                 else{
-                    res.status(400).send(`Collection hanya boleh diedit oleh pemiliki collection`);
+                    res.status(400).send(`Collection hanya boleh diedit oleh pemilik collection`);
                 }
             }
             else{

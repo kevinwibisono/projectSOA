@@ -96,6 +96,31 @@ router.put("/getPremium", async function(req, res){
         }
 });
 
+router.put("/topupSaldo", async function(req, res){
+    let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+    if(result.length > 0){
+        let result = await executeQuery(`SELECT * FROM usertable where username = '${req.query.username}' and apiKey = '${req.query.apiKey}'`);
+        if(result.length > 0){
+            var nama = result[0].nama;
+            if(req.body.nominal && req.body.nominal > 0){
+                var nominal = req.body.nominal;
+                var saldobaru = parseInt(result[0].saldo)+parseInt(nominal);
+                await executeQuery(`UPDATE usertable SET saldo = saldo+${nominal} WHERE username = '${req.query.username}' and apiKey = '${req.query.apiKey}'`);
+                res.status(200).send(`Saldo user ${nama} telah sukses ditambahkan! Saldo sekarang ${saldobaru}`);
+            }
+            else{
+                res.status(400).send("Nominal pengisian saldo tidak boleh kosong");
+            }
+        }
+        else{
+            res.status(400).send("Username tidak sesuai");
+        }
+    }
+    else{
+        res.status(401).send("Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid");
+    }
+});
+
 process.on("exit", function(){
     client.end();
 });
