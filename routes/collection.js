@@ -177,4 +177,18 @@ router.get("/getCollection", async function(req, res){
     }
 });
 
+router.get("/favoriteCollection", async function(req, res){
+    if(req.query.apiKey == null) res.status(400).send("API key harus disediakan");
+    else{
+        let cekKey = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+        if(cekKey.length > 0){
+            if(req.query.username == null) res.status(400).send("username harus disediakan");
+            else {
+                let hasil = await executeQuery(`select * from collection where id in (select collection_id from favorite where username = '${req.query.username}')`);
+                res.status(200).send(hasil);
+            }
+        }
+        else res.status(404).send("API key tidak ditemukan");
+    }
+});
 module.exports = router;
