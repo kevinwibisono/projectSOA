@@ -160,5 +160,21 @@ router.put("/updateCollection", async function(req, res){
     }
 });
 
+router.get("/getCollection", async function(req, res){
+    if(req.query.apiKey == null) res.status(400).send("API key harus ada");
+    else{
+        let cekKey = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+        if(cekKey.length > 0){
+            var city_id = (req.query.location == null) ? '' : req.query.location;
+            var name = (req.query.collectorname == null) ? '' : req.query.collectorname;
+            var keyword = (req.query.keyword == null) ? '' : req.query.keyword;
+            var query = `select * from collection where city_id::text like '${city_id}%' and username like '%${name}%' and (LOWER(collection_name) like LOWER('%${keyword}%') OR LOWER(collection_desc) like LOWER('%${keyword}%'))`;
+            let hasil = await executeQuery(query);
+            if(hasil.length > 0) res.status(200).send(hasil);
+            else res.status(200).send("Tidak hasil yang sesuai dengan permintaan");
+        }
+        else res.status(404).send("API key tidak ditemukan");
+    }
+});
 
 module.exports = router;
