@@ -58,6 +58,21 @@ router.post("/addReview", async function(req, res){
     }
 });
 
+router.delete("/deleteReview", async function(req, res){
+  if(req.query.apiKey == null) res.status(400).send("Field API Key harus terisi");
+  else{
+    let cek = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+    if(cek.length > 0){
+      if(req.query.reviewId == null) res.status(400).send("ReviewId harus terisi");
+      else{
+        await executeQuery(`delete from review where id = '${req.query.reviewId}'`);
+        res.status(200).send(`Review dengan id -> ${req.query.reviewId} telah terhapus`);
+      }
+    }
+    else res.status(404).send("API key tidak ditemukan");
+  }
+});
+
 process.on("exit", function(){
     client.end();
 });
