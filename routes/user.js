@@ -109,6 +109,25 @@ router.put("/topupSaldo", async function(req, res){
     }
 });
 
+router.post("/registerUser", async function(req, res){
+    if(req.body.nama == null) res.status(400).send("field nama harus terisi");
+    else{
+        if(req.body.username == null) res.status(400).send("field usernama harus terisi");
+        else{
+            if(req.body.password == null) res.status(400).send("field password harus terisi");
+            else{
+                let tes = await executeQuery(`SELECT * FROM usertable where username = '${req.body.username}'`);
+                if(tes.length == 0){
+                    var query = `insert into usertable(username,password,nama,picture,apiKey,tipe,saldo,apihit) values('${req.body.username}','${req.body.password}','${req.body.nama}','default.jpg','${randomstring.generate(30)}',0,0,100)`;
+                    await executeQuery(query);
+                    res.status(200).send(`User dengan username ${req.body.username} berhasil daftar`);
+                }
+                else res.status(403).send("Username telah digunakan");
+            }
+        }
+    }
+});
+
 process.on("exit", function(){
     client.end();
 });
