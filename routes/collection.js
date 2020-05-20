@@ -110,6 +110,7 @@ router.put("/updateCollection", async function(req, res){
             if(idresult.length > 0){
                 let userresult = await executeQuery(`SELECT * FROM collection where id = ${req.query.collectionId} and username = '${username}'`);
                 if(userresult.length > 0){
+                    var collectionName = userresult[0].collection_name;
                     if(req.body.collectionName == "" || req.body.collectionDescription == ""|| req.body.restoIds == "" || req.body.cityId == ""){
                         res.status(400).send("Seluruh field harus diisi");
                     }
@@ -135,7 +136,7 @@ router.put("/updateCollection", async function(req, res){
                             if(allRestoValid){
                                 //semua resto ada di dlm zomato api
                                 await executeQuery(`UPDATE collection set collection_name = '${req.body.collectionName}' , collection_desc = '${req.body.collectionDescription}', city_id = ${req.body.cityId}, resto_ids = '${req.body.restoIds}' where id = ${req.query.collectionId}`);
-                                res.status(200).send(`Collection ${req.body.collectionName} berhasil diubah`);
+                                res.status(200).send(`Collection ${collectionName} berhasil diubah ${req.body.collectionName}`);
                             }
                             else{
                                 res.status(404).send("Resto id yang diinputkan invalid, tidak ditemukan atau bukan merupakan resto di kota tersebut");
@@ -144,7 +145,7 @@ router.put("/updateCollection", async function(req, res){
                     }
                 }
                 else{
-                    res.status(400).send(`Collection hanya boleh diedit oleh pemilik collection`);
+                    res.status(401).send(`Collection hanya boleh diedit oleh pemilik collection`);
                 }
             }
             else{
@@ -152,7 +153,7 @@ router.put("/updateCollection", async function(req, res){
             }
         }
         else{
-            res.status(404).send("Pada halaman ini harus disertakan id dari collection yang ingin di-edit");
+            res.status(401).send("Pada halaman ini harus disertakan id dari collection yang ingin di-edit");
         }
     }
     else{

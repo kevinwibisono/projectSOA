@@ -68,27 +68,21 @@ router.delete('/deleteUser', async function(req, res) {
 router.put("/getPremium", async function(req, res){
     let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
         if(result.length > 0){
-            let result = await executeQuery(`SELECT * FROM usertable where username = '${req.query.username}' and apiKey = '${req.query.apiKey}'`);
-            if(result.length > 0){
-                if(result[0].tipe == 0){
-                    //free user
-                    var nama = result[0].nama;
-                    var saldo = result[0].saldo;
-                    if(result[0].saldo >= 100000){
-                        saldo = saldo - 100000;
-                        let result = await executeQuery(`UPDATE usertable SET tipe = 1, apihit = 10000, saldo = saldo-100000 where username='${req.query.username}' and apiKey = '${req.query.apiKey}'`);
-                        res.status(200).send(`Akun user ${nama} telah diupgrade menjadi premium dan penggunaan api telah ditambahkan. Saldo anda sekarang ${saldo}`);
-                    }
-                    else{
-                        res.status(400).send("Saldo anda tidak mencukupi, silahkan akses halaman /api/user/topup untuk pengisian");
-                    }
+            if(result[0].tipe == 0){
+                //free user
+                var nama = result[0].nama;
+                var saldo = result[0].saldo;
+                if(result[0].saldo >= 100000){
+                    saldo = saldo - 100000;
+                    let result = await executeQuery(`UPDATE usertable SET tipe = 1, apihit = 10000, saldo = saldo-100000 where apiKey = '${req.query.apiKey}'`);
+                    res.status(200).send(`Akun user ${nama} telah diupgrade menjadi premium dan penggunaan api telah ditambahkan. Saldo anda sekarang ${saldo}`);
                 }
                 else{
-                    res.status(400).send("Akun bukan merupakan akun free, mengakses halaman ini tidak akan memberikan efek pada akun anda");
+                    res.status(400).send("Saldo anda belum mencapai harga upgrade akun (Rp 100.000), silahkan akses halaman /api/user/topupSaldo untuk pengisian");
                 }
             }
             else{
-                res.status(400).send("Username tidak sesuai");
+                res.status(401).send("Akun bukan merupakan akun free, mengakses halaman ini tidak akan memberikan efek pada akun anda");
             }
         }
         else{
@@ -99,21 +93,15 @@ router.put("/getPremium", async function(req, res){
 router.put("/topupSaldo", async function(req, res){
     let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
     if(result.length > 0){
-        let result = await executeQuery(`SELECT * FROM usertable where username = '${req.query.username}' and apiKey = '${req.query.apiKey}'`);
-        if(result.length > 0){
-            var nama = result[0].nama;
-            if(req.body.nominal && req.body.nominal > 0){
-                var nominal = req.body.nominal;
-                var saldobaru = parseInt(result[0].saldo)+parseInt(nominal);
-                await executeQuery(`UPDATE usertable SET saldo = saldo+${nominal} WHERE username = '${req.query.username}' and apiKey = '${req.query.apiKey}'`);
-                res.status(200).send(`Saldo user ${nama} telah sukses ditambahkan! Saldo sekarang ${saldobaru}`);
-            }
-            else{
-                res.status(400).send("Nominal pengisian saldo tidak boleh kosong");
-            }
+        var nama = result[0].nama;
+        if(req.body.nominal && req.body.nominal > 0){
+            var nominal = req.body.nominal;
+            var saldobaru = parseInt(result[0].saldo)+parseInt(nominal);
+            await executeQuery(`UPDATE usertable SET saldo = saldo+${nominal} WHERE apiKey = '${req.query.apiKey}'`);
+            res.status(200).send(`Saldo user ${nama} telah sukses ditambahkan! Saldo sekarang ${saldobaru}`);
         }
         else{
-            res.status(400).send("Username tidak sesuai");
+            res.status(400).send("Nominal pengisian saldo tidak boleh kosong");
         }
     }
     else{
