@@ -1,5 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const randomstring = require("randomstring");
+const multer = require("multer");
+const path=require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 const { Client } = require('pg');
@@ -45,6 +49,44 @@ router.get("/getUser", async function(req, res){
     else{
         res.status(401).send("Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid");
     }    
+});
+
+router.put("/updateProfile", async function(req, res){
+    if(req.query.apiKey == null) res.status(400).send("API key harus ada");
+    else{
+        if(req.query.username == null) res.status(400).send("username harus ada");
+        else{
+            var query = `select * from usertable where apiKey = '${req.query.apiKey}' and username = '${req.query.username}'`;
+            let profile = await executeQuery(query);
+            if(profile.length > 0){
+                var nama = (req.body.nama == null) ? profile[0].nama : req.body.nama;
+                var password = (req.body.password == null) ? profile[0].password : req.body.password;
+                var foto = req.query.username + ".jpg";
+                upload(req,res,(err)=>{
+                    if(err){
+                        console.log(err);
+                        res.send(err);
+                    }else{
+                        if(req.file == undefined){
+                            console.log("Tidak ada file");
+                            foto = 'default.jpg';
+                        } 
+                        else{
+                            console.log(req.file);
+                            logic = true;
+                            fs.rename(`./uploads/${req.file.filename}`, `./uploads/${foto}`, function(err) {
+                                if ( err ) console.log('ERROR: ' + err);
+                            }); 
+                        }
+                    }
+                });
+                var query = `update usertable set nama = '${nama}', password = '${password}', picture = '${foto}' where apiKey = '${req.query.apiKey}' and username = '${req.query.username}'`;
+                await executeQuery(query);
+                res.status(200).send(`Update ${req.query.username} berhasil`);
+            }
+            else res.status(404).send("User tidak ditemukan");
+        }
+    }
 });
 
 router.delete('/deleteUser', async function(req, res) {
