@@ -58,6 +58,18 @@ router.post("/addReview", async function(req, res){
     }
 });
 
+router.get('/getReview', async function(req, res) {
+  if(req.query.apiKey == null) res.status(400).send("Field API Key harus terisi");
+  else{
+    let cek = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+    if(cek.length > 0){
+        let hasil = await executeQuery(`SELECT * from review`);
+        res.status(200).send(hasil);
+    }
+    else res.status(404).send("API key tidak ditemukan");
+  }
+});
+
 router.delete("/deleteReview", async function(req, res){
   if(req.query.apiKey == null) res.status(400).send("Field API Key harus terisi");
   else{
