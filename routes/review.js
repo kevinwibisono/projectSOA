@@ -20,6 +20,20 @@ function executeQuery(query){
   });
 }
 
+function getRestoName(id){	
+  return new Promise(function(resolve, reject){
+    var request = require('request');
+    var options = {
+      'method': 'GET',
+      'url': `https://developers.zomato.com/api/v2.1/restaurant?apikey=f5f3e074609c32c34acee3f23da47fe0&res_id=${id}`
+    };
+    request(options, function (error, response) {
+      if (error) reject(error);
+      resolve(JSON.parse(response.body).name);
+    });
+  });
+}
+
 router.post("/addReview", async function(req, res){
     let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
     if(result.length > 0){
