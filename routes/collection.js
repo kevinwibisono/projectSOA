@@ -93,7 +93,7 @@ router.post("/addCollection", async function(req, res){
             }
         }
         else{
-            res.status(400).send("Akun anda bukan merupakan akun premium, anda tidak diijinkan mengakses halaman ini")
+            res.status(401).send("Akun anda bukan merupakan akun premium, anda tidak diijinkan mengakses halaman ini")
         }
     }
     else{
@@ -136,7 +136,7 @@ router.put("/updateCollection", async function(req, res){
                             if(allRestoValid){
                                 //semua resto ada di dlm zomato api
                                 await executeQuery(`UPDATE collection set collection_name = '${req.body.collectionName}' , collection_desc = '${req.body.collectionDescription}', city_id = ${req.body.cityId}, resto_ids = '${req.body.restoIds}' where id = ${req.query.collectionId}`);
-                                res.status(200).send(`Collection ${collectionName} berhasil diubah ${req.body.collectionName}`);
+                                res.status(200).send(`Collection ${collectionName} berhasil diubah menjadi ${req.body.collectionName}`);
                             }
                             else{
                                 res.status(404).send("Resto id yang diinputkan invalid, tidak ditemukan atau bukan merupakan resto di kota tersebut");

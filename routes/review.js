@@ -43,12 +43,12 @@ router.post("/addReview", async function(req, res){
           res.status(400).send("Field resto id dan review harus diisi");
         }
         else{
-          await executeQuery(`INSERT INTO review(username, resto_id, review) VALUES('${username}', ${req.body.restoId}, '${req.body.review}')`);
           let restoname = await getRestoName(req.body.restoId);
           if(restoname == undefined){
             res.status(404).send(`Tidak ditemukan resto dengan id ${req.body.restoId}`);
           }
           else{
+            await executeQuery(`INSERT INTO review(username, resto_id, review) VALUES('${username}', ${req.body.restoId}, '${req.body.review}')`);
             res.status(200).send(`Review ${nama} terhadap resto ${restoname} berhasil ditambahkan`);
           }
         }
