@@ -20,20 +20,6 @@ function executeQuery(query){
   });
 }
 
-function getRestoName(id){
-  return new Promise(function(resolve, reject){
-    var request = require('request');
-    var options = {
-      'method': 'GET',
-      'url': `https://developers.zomato.com/api/v2.1/restaurant?apikey=f5f3e074609c32c34acee3f23da47fe0&res_id=${id}`
-    };
-    request(options, function (error, response) { 
-      if (error) reject(error);
-      resolve(JSON.parse(response.body).name);
-    });
-  });
-}
-
 router.post("/addReview", async function(req, res){
     let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
     if(result.length > 0){
@@ -56,6 +42,18 @@ router.post("/addReview", async function(req, res){
     else{
         res.status(401).send("Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid");
     }
+});
+
+router.get('/getReview', async function(req, res) {
+  if(req.query.apiKey == null) res.status(400).send("Field API Key harus terisi");
+  else{
+    let cek = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+    if(cek.length > 0){
+      let hasil = await executeQuery(`SELECT * from review`);
+      res.status(200).send(hasil);
+    }
+    else res.status(404).send("API key tidak ditemukan");
+  }
 });
 
 router.delete("/deleteReview", async function(req, res){
