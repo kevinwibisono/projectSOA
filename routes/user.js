@@ -170,6 +170,81 @@ router.post("/registerUser", async function(req, res){
     }
 });
 
+router.delete('/editReview', async function(req, res) {
+    if(req.query.apikey) {
+        apikey = req.query.apikey;
+    }
+    if(req.query.apiKey == undefined){
+        res.status(401).send("APIKey not found. You are not authorized");
+    }else{
+        var id = req.body.id;
+        var username = req.body.username;
+        var password = req.body.password;
+        var review = req.body.review;
+
+        let result = await executeQuery(`SELECT * FROM usertable where username = '${username}' and password = '${password}'`);
+        if(result.length > 0) {
+            if(result[0].apikey != apikey){    
+                res.status(400).json("api key invalid"); 
+            }else{
+                var usertab = result[0].username;
+                let result1 = await executeQuery(`SELECT * FROM review where username = '${usertab}'`);
+                if(result1.length > 0){
+                    var query = `update review set review = '${review}' where id = '${id}'`
+                    let res = await executeQuery(query);
+                }else{
+                    res.status(400).json("Tidak dapat menemukan Review / Comment!");
+                }
+            }
+        }else{
+            res.status(400).json("Tidak dapat menemukan USER!");
+        }
+    }
+});
+
+router.post('/loginUser', async function(req, res) {
+    let cari = await executeQuery(`SELECT * FROM usertable WHERE username = '${req.body.username}' and password ='${req.body.password}'`);
+    if(cari.length > 0){
+        res.status(400).send("User tidak ditemukan!");
+    }else {
+        var apikey = cari[0].apiKey;
+        res.status(200).send("Berhasil Login, API anda = " + apikey);
+    }   
+});
+
+router.post('/deleteCollection', async function(req, res) {
+    if(req.query.apikey) {
+        apikey = req.query.apikey;
+    }
+    if(req.query.apiKey == undefined){
+        res.status(401).send("APIKey not found. You are not authorized");
+    }else{
+        var id = req.body.id;
+        var username = req.body.username;
+        var password = req.body.password;
+        var review = req.body.review;
+
+        let result = await executeQuery(`SELECT * FROM usertable where username = '${username}' and password = '${password}'`);
+        if(result.length > 0) {
+            if(result[0].apikey != apikey){    
+                res.status(400).json("api key invalid"); 
+            }else{
+                var usertab = result[0].username;
+                let result1 = await executeQuery(`SELECT * FROM collection where username = '${usertab}'`);
+                if(result1.length > 0){
+                    var query = `DELETE FROM collection WHERE username = '${id}'`
+                    let res = await executeQuery(query);
+                }else{
+                    res.status(400).json("Tidak dapat menemukan Review / Comment!");
+                }
+            }
+        }else{
+            res.status(400).json("Tidak dapat menemukan USER!");
+        }
+    }
+});
+
+
 process.on("exit", function(){
     client.end();
 });
