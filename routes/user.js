@@ -184,16 +184,33 @@ router.delete('/editReview', async function(req, res) {
 
         let result = await executeQuery(`SELECT * FROM usertable where username = '${username}' and password = '${password}'`);
         if(result.length > 0) {
-            if(result[0].apikey != apikey){    
-                res.status(400).json("api key invalid"); 
-            }else{
-                var usertab = result[0].username;
-                let result1 = await executeQuery(`SELECT * FROM review where username = '${usertab}'`);
-                if(result1.length > 0){
-                    var query = `update review set review = '${review}' where id = '${id}'`
-                    let res = await executeQuery(query);
+            if(result[0].tipe == 2){
+                if(result[0].apikey != apikey){    
+                    res.status(400).json("api key invalid"); 
                 }else{
-                    res.status(400).json("Tidak dapat menemukan Review / Comment!");
+                    var usertab = result[0].username;
+                    let result1 = await executeQuery(`SELECT * FROM review where username = '${usertab}'`);
+                    if(result1.length > 0){
+                        var query = `update review set review = '${review}' where id = '${id}'`
+                        let res = await executeQuery(query);
+                    }else{
+                        res.status(400).json("Tidak dapat menemukan Review / Comment!");
+                    }
+                }
+            }else{
+                if(result[0].apikey != apikey){    
+                    res.status(400).json("api key invalid"); 
+                }else{
+                    var usertab = result[0].username;
+                    let result1 = await executeQuery(`SELECT * FROM review where username = '${usertab}'`);
+                    if(result1.length > 0){
+                        var query = `update review set review = '${review}' where id = '${id}'`
+                        let res = await executeQuery(query);
+                        var query1 = `update usertable set apihit = -1 where username = '${usertab}'`                    
+                        let res1 = await executeQuery(query1);
+                    }else{
+                        res.status(400).json("Tidak dapat menemukan Review / Comment!");
+                    }
                 }
             }
         }else{
@@ -212,6 +229,36 @@ router.post('/loginUser', async function(req, res) {
     }   
 });
 
+router.post('/buySubscription', async function(req, res) {
+    if(req.query.apikey) {
+        apikey = req.query.apikey;
+    }
+    if(req.query.apiKey == undefined){
+        res.status(401).send("APIKey not found. You are not authorized");
+    }else{
+        let result = await executeQuery(`SELECT * FROM usertable where username = '${req.query.username}' and password = '${req.query.password}'`);   
+        if(result[0].apikey != apikey) {
+            res.status(400).json("api key invalid"); 
+        }else if( result.length > 0){    
+            if(result[0].tipe == 2){
+                res.status(400).send("Anda sebagai Admin");
+            }else{
+                var saldo_user = result[0].saldo;
+                var jumlah     = req.body.jumlahsubscription;
+                let query = "";
+                if(saldo_user >= 75){
+                    var total      = jumlah * 75;
+                    var sisa_saldo = saldo_user - total;
+                    query = `update usertable set apihit = apihit + '${total}' , saldo  = saldo + '${sisa_saldo}' where username = '${req.query.username}'`                    
+                    let res = await executeQuery(query);
+                }else{
+                    res.status(400).json("Saldo user tidak mencukupi"); 
+                }
+            }
+        }
+    }
+});
+
 router.post('/deleteCollection', async function(req, res) {
     if(req.query.apikey) {
         apikey = req.query.apikey;
@@ -222,23 +269,39 @@ router.post('/deleteCollection', async function(req, res) {
         var id = req.body.id;
         var username = req.body.username;
         var password = req.body.password;
-        var review = req.body.review;
 
         let result = await executeQuery(`SELECT * FROM usertable where username = '${username}' and password = '${password}'`);
         if(result.length > 0) {
-            if(result[0].apikey != apikey){    
-                res.status(400).json("api key invalid"); 
-            }else{
-                var usertab = result[0].username;
-                let result1 = await executeQuery(`SELECT * FROM collection where username = '${usertab}'`);
-                if(result1.length > 0){
-                    var query = `DELETE FROM collection WHERE username = '${id}'`
-                    let res = await executeQuery(query);
+            if(result[0].tipe == 2){
+                if(result[0].apikey != apikey){    
+                    res.status(400).json("api key invalid"); 
                 }else{
-                    res.status(400).json("Tidak dapat menemukan Review / Comment!");
+                    var usertab = result[0].username;
+                    let result1 = await executeQuery(`SELECT * FROM collection where username = '${usertab}'`);
+                    if(result1.length > 0){
+                        var query = `DELETE FROM collection WHERE id = '${id}'`
+                        let res = await executeQuery(query);
+                    }else{
+                        res.status(400).json("Tidak dapat menemukan Review / Comment!");
+                    }
                 }
-            }
-        }else{
+            }else{
+                if(result[0].apikey != apikey){    
+                    res.status(400).json("api key invalid"); 
+                }else{
+                    var usertab = result[0].username;
+                    let result1 = await executeQuery(`SELECT * FROM collection where username = '${usertab}'`);
+                    if(result1.length > 0){
+                        var query = `DELETE FROM collection WHERE id = '${id}'`
+                        let res = await executeQuery(query);
+                        var query1 = `update usertable set apihit = -1 where username = '${usertab}'`                    
+                        let res1 = await executeQuery(query1);
+                    }else{
+                        res.status(400).json("Tidak dapat menemukan Review / Comment!");
+                    }
+                }
+            }            
+        }else{            
             res.status(400).json("Tidak dapat menemukan USER!");
         }
     }
