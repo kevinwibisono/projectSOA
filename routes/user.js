@@ -94,13 +94,13 @@ router.delete('/deleteUser', async function(req, res) {
     if(cari.length > 0){
         if(cari[0].tipe == 0){
             let hapus = await executeQuery(`DELETE FROM usertable WHERE username = '${req.body.username}'`);
-            res.send(hapus);
+            res.status(200).send("Berhasil hapus user!");
         }
         else{
             let carilagi = await executeQuery(`SELECT * FROM usertable WHERE apikey = '${req.query.apiKey}' and username = '${req.body.username}'`);
             if(carilagi.length > 0){
                 let hapus = await executeQuery(`DELETE FROM usertable WHERE username = '${req.body.username}'`);
-                res.send(hapus);
+                res.status(200).send("Berhasil hapus user!");
             }
             else res.status(401).send("User tidak memiliki hak akses untuk menghapus user lain!");
         }

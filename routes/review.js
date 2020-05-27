@@ -63,8 +63,15 @@ router.get('/getReview', async function(req, res) {
   else{
     let cek = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
     if(cek.length > 0){
-      let hasil = await executeQuery(`SELECT * from review`);
-      res.status(200).send(hasil);
+      if(cek[0].apihit > 0){
+        let hasil = await executeQuery(`SELECT * from review`);
+        res.status(200).send(hasil);
+        let api_hit = cek[0].apihit - 1;
+        let kurang = await executeQuery(`UPDATE usertable SET apihit = ${api_hit} WHERE apiKey = '${req.query.apiKey}'`);
+      }else{
+        res.status(401).send("API Hit tidak cukup!");
+      }
+      
     }
     else res.status(404).send("API key tidak ditemukan");
   }

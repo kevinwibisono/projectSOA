@@ -72,10 +72,72 @@ router.get('/getAllCuisineinCity', async function(req, res) {
     else{
       let cek = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
       if(cek.length > 0){
-        let hasil = await getCuisine(req.body.city_id);
-        res.status(200).send(hasil);
+        if(cek[0].apihit > 0){
+            let api_hit = cek[0].apihit - 1;
+            let kurang = await executeQuery(`UPDATE usertable SET apihit = ${api_hit} WHERE apiKey = '${req.query.apiKey}'`);
+            let hasil = await getCuisine(req.body.city_id);
+            res.status(200).send(hasil);
+        }
+        else{
+            res.status(401).send("API Hit tidak cukup!");
+        }
       }
       else res.status(404).send("API key tidak ditemukan");
+    }
+});
+
+router.post("/likeCollection", async function(req, res) {
+    let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+    if(result.length > 0){
+        let id = req.body.id_collection;
+        let username = result[0].username;
+        let api_hit = result[0].apihit;
+        let cari = await executeQuery(`SELECT * FROM collection WHERE id = '${id}'`);
+        if(api_hit > 0){
+            if(cari.length > 0){
+                let hasil = await executeQuery(`SELECT * FROM favorite WHERE collection_id = '${id}' and username = '${username}'`);
+                if(hasil.length > 0){
+                    res.status(200).send('User telah memfavorite kan collection!');
+                }
+                else{
+                    let tambah = await executeQuery(`INSERT INTO favorite (collection_id, username) VALUES ('${id}','${username}')`);
+                    api_hit = api_hit - 1;
+                    let kurang = await executeQuery(`UPDATE usertable SET apihit = ${api_hit} WHERE apiKey = '${req.query.apiKey}'`);
+                    res.status(200).send('Berhasil memfavorite kan collection!');
+                }
+            }
+            else{
+                res.status(404).send('Collection tidak ada!');
+            }
+        } else res.status(401).send("API hit tidak cukup!");
+        
+    }else{
+        res.status(401).send("API Key invalid!");
+    }
+});
+
+router.post("/unlikeCollection", async function(req, res) {
+    let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+    if(result.length > 0){
+        let id = req.body.id_collection;
+        let username = result[0].username;
+        let api_hit = result[0].apihit;
+        if(api_hit > 0){
+            let hasil = await executeQuery(`SELECT * FROM favorite WHERE collection_id = '${id}' and username = '${username}'`);
+            if(hasil.length > 0){
+                let tambah = await executeQuery(`DELETE FROM favorite WHERE collection_id = '${id}' and username = '${username}'`);
+                api_hit = api_hit - 1;
+                let kurang = await executeQuery(`UPDATE usertable SET apihit = ${api_hit} WHERE apiKey = '${req.query.apiKey}'`);
+                res.status(200).send('Berhasil unlike collection!');
+            }
+            else{
+                res.status(404).send('User tidak memfavorite kan collection!');
+            }
+        }
+        else res.status(401).send("API hit tidak cukup!");
+        
+    }else{
+        res.status(401).send("API Key invalid!");
     }
 });
 
