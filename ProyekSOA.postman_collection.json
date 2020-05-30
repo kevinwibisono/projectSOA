@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "64b6e9f2-1a2b-4035-a466-ef61a8d8eef4",
+		"_postman_id": "5e2fc66e-b361-4890-ace2-84408414efbf",
 		"name": "ProyekSOA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,7 +11,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "f7358d88-9aa6-4ee9-8e7a-d734ff8973a0",
+						"id": "561f1125-832c-49d9-afb6-c0132413a39c",
 						"exec": [
 							"myVar = pm.variables.get(\"get_user\");\r",
 							"\r",
@@ -30,7 +30,7 @@
 							"            \"return_body\": \"Data user tidak ditemukan\",\r",
 							"        },\r",
 							"        {\r",
-							"            \"api_key\": \"K8V17j5itJ3qQppBeFEY1oesQYoCPr\",\r",
+							"            \"api_key\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\r",
 							"            \"username\": \"\",\r",
 							"            \"return_code\": 401,\r",
 							"            \"return_body\": \"Akun anda bukan merupakan akun administrator, anda tidak diijinkan mengakses halaman ini\",\r",
@@ -56,6 +56,7 @@
 							"}\r",
 							"\r",
 							"let currentData = myVar.shift();\r",
+							"pm.environment.set(\"url\", \"localhost:3000\");\r",
 							"pm.environment.set(\"api_key\", currentData[\"api_key\"]);\r",
 							"pm.environment.set(\"username\", currentData[\"username\"]);\r",
 							"pm.environment.set(\"return_code\", currentData[\"return_code\"]);\r",
@@ -71,7 +72,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "3d9fab44-fbc3-463c-8e5e-c48ab3b247a7",
+						"id": "a9c6d7dd-e08c-4a9f-98b3-35e88c787761",
 						"exec": [
 							"varTest = pm.environment.get(\"get_user\");\r",
 							"\r",
@@ -126,61 +127,6 @@
 				}
 			},
 			"response": [
-				{
-					"name": "ERROR (API Key tidak diberikan atau tidak terdapat di DB)",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/user/getUser?apiKey=abcdefg",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"getUser"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": "abcdefg"
-								}
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "80"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 06:28:24 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
-				},
 				{
 					"name": "ERROR (Username yang dicari tidak ditemukan pada user manapun di DB)",
 					"originalRequest": {
@@ -239,61 +185,6 @@
 					],
 					"cookie": [],
 					"body": "Data user tidak ditemukan"
-				},
-				{
-					"name": "ERROR (API Key yang diberikan bukan milik administrator)",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/user/getUser?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"getUser"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
-								}
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "88"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"58-KlnR1XVaErZRqJhHrWP8nOgmJag\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 06:29:43 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Akun anda bukan merupakan akun administrator, anda tidak diijinkan mengakses halaman ini"
 				},
 				{
 					"name": "SUCCESS (User tertentu)",
@@ -413,6 +304,116 @@
 					],
 					"cookie": [],
 					"body": "[\n    {\n        \"username\": \"admin\",\n        \"password\": \"admin\",\n        \"nama\": \"administrator\",\n        \"picture\": \"\",\n        \"apikey\": \"6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1\",\n        \"tipe\": 2,\n        \"saldo\": 0,\n        \"apihit\": 100\n    },\n    {\n        \"username\": \"freeuser\",\n        \"password\": \"free\",\n        \"nama\": \"free user\",\n        \"picture\": \"\",\n        \"apikey\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\n        \"tipe\": 1,\n        \"saldo\": 46800,\n        \"apihit\": 10000\n    },\n    {\n        \"username\": \"user_kenny\",\n        \"password\": \"123\",\n        \"nama\": \"sobadlul\",\n        \"picture\": \"user_kenny.jpg\",\n        \"apikey\": \"tVRdhPh0ASZDNb97ZpInoBWQV1YLJf\",\n        \"tipe\": 0,\n        \"saldo\": 0,\n        \"apihit\": 100\n    },\n    {\n        \"username\": \"NewUser002\",\n        \"password\": \"new\",\n        \"nama\": \"Newest User\",\n        \"picture\": \"Profile2.jpg\",\n        \"apikey\": \"K8V17j5itJ3qQppBeFEY1oesQYoCPr\",\n        \"tipe\": 1,\n        \"saldo\": 63000,\n        \"apihit\": 10000\n    },\n    {\n        \"username\": \"testfreeuser\",\n        \"password\": \"testfree\",\n        \"nama\": \"User Testing Free\",\n        \"picture\": \"\",\n        \"apikey\": \"p6sVF1x79Utkacw9ehwoFAmVC7Dq03\",\n        \"tipe\": 0,\n        \"saldo\": 0,\n        \"apihit\": 100\n    },\n    {\n        \"username\": \"testfreeuser2\",\n        \"password\": \"testfree2\",\n        \"nama\": \"User Testing Free 2\",\n        \"picture\": \"\",\n        \"apikey\": \"XRKtjahQS0r3RnmnHa3flh7pay1w4t\",\n        \"tipe\": 0,\n        \"saldo\": 100000,\n        \"apihit\": 10000\n    }\n]"
+				},
+				{
+					"name": "ERROR (API Key tidak diberikan atau tidak terdapat di DB)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/getUser?apiKey=abcdefg",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"getUser"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "abcdefg"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "80"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 06:28:24 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
+				},
+				{
+					"name": "ERROR (API Key yang diberikan bukan milik administrator)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/getUser?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"getUser"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "88"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"58-KlnR1XVaErZRqJhHrWP8nOgmJag\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 06:29:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Akun anda bukan merupakan akun administrator, anda tidak diijinkan mengakses halaman ini"
 				}
 			]
 		},
@@ -422,11 +423,25 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "34100723-e56c-4696-8969-f72a913b1ed6",
+						"id": "5eb67c6d-5bc0-42b9-9e4a-85653f2acd8a",
 						"exec": [
 							"myVar = pm.variables.get(\"get_premium\");\r",
 							"\r",
 							"if (!myVar || myVar.length <= 0) {\r",
+							"    pm.sendRequest({\r",
+							"        url: 'localhost:3000/api/matkul/',\r",
+							"        method: 'POST',\r",
+							"        body: {\r",
+							"            mode: 'urlencoded',\r",
+							"            urlencoded: [\r",
+							"                {key: 'kode', value: 'xxx', disabled: false},\r",
+							"                {key: 'nama', value: 'yyy', disabled: false},\r",
+							"                {key: 'sks', value: '9', disabled: false}\r",
+							"            ]\r",
+							"        }\r",
+							"    }, function (err, response) {\r",
+							"        console.log(err);\r",
+							"    });\r",
 							"    myVar = [\r",
 							"        {\r",
 							"            \"api_key\": \"\",\r",
@@ -452,6 +467,7 @@
 							"}\r",
 							"\r",
 							"let currentData = myVar.shift();\r",
+							"pm.environment.set(\"url\", \"localhost:3000\");\r",
 							"pm.environment.set(\"api_key\", currentData[\"api_key\"]);\r",
 							"pm.environment.set(\"return_code\", currentData[\"return_code\"]);\r",
 							"pm.environment.set(\"return_body\", currentData[\"return_body\"]);\r",
@@ -464,7 +480,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "8f45b4e0-d6b0-491a-8457-85bfa3e91c0e",
+						"id": "0907d911-c240-4cce-9e47-6660ee14986a",
 						"exec": [
 							"varTest = pm.environment.get(\"get_premium\");\r",
 							"\r",
@@ -507,7 +523,7 @@
 			},
 			"response": [
 				{
-					"name": "SUCCESS",
+					"name": "ERROR (Saldo user tidak mencukupi untuk upgrade akun)",
 					"originalRequest": {
 						"method": "PUT",
 						"header": [],
@@ -529,8 +545,8 @@
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
+					"status": "Bad Request",
+					"code": 400,
 					"_postman_previewlanguage": "html",
 					"header": [
 						{
@@ -543,15 +559,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "113"
+							"value": "118"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"71-TVdAH6p90NxGgMqt60rj8JyGVNw\""
+							"value": "W/\"76-Ss6Jr6fRLepiFsmKm7l4fOqjdHs\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 18 May 2020 04:23:46 GMT"
+							"value": "Mon, 18 May 2020 04:22:23 GMT"
 						},
 						{
 							"key": "Connection",
@@ -559,7 +575,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "Akun user Newest User telah diupgrade menjadi premium dan penggunaan api telah ditambahkan. Saldo anda sekarang 0"
+					"body": "Saldo anda belum mencapai harga upgrade akun (Rp 100.000), silahkan akses halaman /api/user/topupSaldo untuk pengisian"
 				},
 				{
 					"name": "ERROR (API Key tidak diberikan atau tidak terdapat di DB)",
@@ -617,7 +633,7 @@
 					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
 				},
 				{
-					"name": "ERROR (Saldo user tidak mencukupi untuk upgrade akun)",
+					"name": "SUCCESS",
 					"originalRequest": {
 						"method": "PUT",
 						"header": [],
@@ -639,8 +655,8 @@
 							]
 						}
 					},
-					"status": "Bad Request",
-					"code": 400,
+					"status": "OK",
+					"code": 200,
 					"_postman_previewlanguage": "html",
 					"header": [
 						{
@@ -653,15 +669,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "118"
+							"value": "113"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"76-Ss6Jr6fRLepiFsmKm7l4fOqjdHs\""
+							"value": "W/\"71-TVdAH6p90NxGgMqt60rj8JyGVNw\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 18 May 2020 04:22:23 GMT"
+							"value": "Mon, 18 May 2020 04:23:46 GMT"
 						},
 						{
 							"key": "Connection",
@@ -669,7 +685,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "Saldo anda belum mencapai harga upgrade akun (Rp 100.000), silahkan akses halaman /api/user/topupSaldo untuk pengisian"
+					"body": "Akun user Newest User telah diupgrade menjadi premium dan penggunaan api telah ditambahkan. Saldo anda sekarang 0"
 				},
 				{
 					"name": "ERROR (API Key yang diberikan bukan merupakan user free)",
@@ -734,7 +750,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "4cc14d01-c919-4c59-9a6e-81ea329f24e0",
+						"id": "89bed736-211d-427a-81e1-34b87aa1e6f3",
 						"exec": [
 							"myVar = pm.variables.get(\"add_review\");\r",
 							"\r",
@@ -772,6 +788,7 @@
 							"}\r",
 							"\r",
 							"let currentData = myVar.shift();\r",
+							"pm.environment.set(\"url\", \"localhost:3000\");\r",
 							"pm.environment.set(\"api_key\", currentData[\"api_key\"]);\r",
 							"pm.environment.set(\"resto_id\", currentData[\"resto_id\"]);\r",
 							"pm.environment.set(\"review\", currentData[\"review\"]);\r",
@@ -788,7 +805,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "226305fb-a04d-4a15-9286-5046ba0e7ad8",
+						"id": "1d376289-aa32-4650-9b03-fdaff7311030",
 						"exec": [
 							"varTest = pm.environment.get(\"add_review\");\r",
 							"\r",
@@ -1134,7 +1151,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "91000742-169d-4874-8ffa-3aef251af3b9",
+						"id": "72dbb419-3351-4e6f-9dbd-ec52669702ad",
 						"exec": [
 							"myVar = pm.variables.get(\"add_collection\");\r",
 							"\r",
@@ -1194,6 +1211,7 @@
 							"}\r",
 							"\r",
 							"let currentData = myVar.shift();\r",
+							"pm.environment.set(\"url\", \"localhost:3000\");\r",
 							"pm.environment.set(\"api_key\", currentData[\"api_key\"]);\r",
 							"pm.environment.set(\"collection_name\", currentData[\"collection_name\"]);\r",
 							"pm.environment.set(\"collection_desc\", currentData[\"collection_desc\"]);\r",
@@ -1212,7 +1230,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "61654188-bb71-4878-9c9d-45762767a390",
+						"id": "67da883f-0d11-4acb-858c-8b4bcc208d80",
 						"exec": [
 							"varTest = pm.environment.get(\"add_collection\");\r",
 							"\r",
@@ -1361,7 +1379,7 @@
 					"body": "Tidak ditemukan kota dengan id tersebut, silahkan kunjungi endpoint /getLocations untuk mengetahui list kota"
 				},
 				{
-					"name": "ERROR (API Key tidak disertakan atau tidak tersedia di DB)",
+					"name": "ERROR (API Key bukan milik premum user)",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -1391,7 +1409,7 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/addCollection?apiKey=",
+							"raw": "{{url}}/api/collec/addCollection?apiKey=tVRdhPh0ASZDNb97ZpInoBWQV1YLJf",
 							"host": [
 								"{{url}}"
 							],
@@ -1403,13 +1421,13 @@
 							"query": [
 								{
 									"key": "apiKey",
-									"value": ""
+									"value": "tVRdhPh0ASZDNb97ZpInoBWQV1YLJf"
 								}
 							]
 						}
 					},
-					"status": "Unauthorized",
-					"code": 401,
+					"status": "Bad Request",
+					"code": 400,
 					"_postman_previewlanguage": "html",
 					"header": [
 						{
@@ -1422,15 +1440,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "80"
+							"value": "82"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
+							"value": "W/\"52-3MqQyDuam6NwiaWmtGiM+mJyd64\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 18 May 2020 08:34:22 GMT"
+							"value": "Mon, 18 May 2020 08:35:59 GMT"
 						},
 						{
 							"key": "Connection",
@@ -1438,7 +1456,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
+					"body": "Akun anda bukan merupakan akun premium, anda tidak diijinkan mengakses halaman ini"
 				},
 				{
 					"name": "ERROR (Salah satu atau semua field tidak terisi)",
@@ -1601,6 +1619,86 @@
 					"body": "Resto id yang diinputkan invalid, tidak ditemukan atau bukan merupakan resto di kota tersebut"
 				},
 				{
+					"name": "ERROR (API Key tidak disertakan atau tidak tersedia di DB)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "collectionName",
+									"value": "Cita Rasa Jakarta",
+									"type": "text"
+								},
+								{
+									"key": "collectionDescription",
+									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Jakarta. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan, restoran yang nagih abis ada disini.",
+									"type": "text"
+								},
+								{
+									"key": "restoIds",
+									"value": "18560991,7403002,18407143",
+									"type": "text"
+								},
+								{
+									"key": "cityId",
+									"value": "74",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/collec/addCollection?apiKey=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"collec",
+								"addCollection"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "80"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 08:34:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
+				},
+				{
 					"name": "SUCCESS",
 					"originalRequest": {
 						"method": "POST",
@@ -1679,86 +1777,6 @@
 					],
 					"cookie": [],
 					"body": "Pembuatan collection Cita Rasa Jakarta oleh user Newest User berhasil dilakukan"
-				},
-				{
-					"name": "ERROR (API Key bukan milik premum user)",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "collectionName",
-									"value": "Cita Rasa Jakarta",
-									"type": "text"
-								},
-								{
-									"key": "collectionDescription",
-									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Jakarta. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan, restoran yang nagih abis ada disini.",
-									"type": "text"
-								},
-								{
-									"key": "restoIds",
-									"value": "18560991,7403002,18407143",
-									"type": "text"
-								},
-								{
-									"key": "cityId",
-									"value": "74",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/api/collec/addCollection?apiKey=tVRdhPh0ASZDNb97ZpInoBWQV1YLJf",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"collec",
-								"addCollection"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": "tVRdhPh0ASZDNb97ZpInoBWQV1YLJf"
-								}
-							]
-						}
-					},
-					"status": "Bad Request",
-					"code": 400,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "82"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"52-3MqQyDuam6NwiaWmtGiM+mJyd64\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 08:35:59 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Akun anda bukan merupakan akun premium, anda tidak diijinkan mengakses halaman ini"
 				}
 			]
 		},
@@ -1768,7 +1786,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "4bd1f5ee-1b7c-49da-bc13-3be94b0cd461",
+						"id": "72b77621-a535-4282-aeca-ad39005aaf69",
 						"exec": [
 							"myVar = pm.variables.get(\"update_collection\");\r",
 							"\r",
@@ -1806,7 +1824,7 @@
 							"        },\r",
 							"        {\r",
 							"            \"api_key\": \"p6sVF1x79Utkacw9ehwoFAmVC7Dq03\",\r",
-							"            \"collection_id\": \"8\",\r",
+							"            \"collection_id\": \"9\",\r",
 							"            \"collection_name\": \"Cita Rasa Bali\",\r",
 							"            \"collection_desc\": \"Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.\",\r",
 							"            \"resto_ids\": \"1703234,1701384,1704764\",\r",
@@ -1816,7 +1834,7 @@
 							"        },\r",
 							"        {\r",
 							"            \"api_key\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\r",
-							"            \"collection_id\": \"8\",\r",
+							"            \"collection_id\": \"9\",\r",
 							"            \"collection_name\": \"\",\r",
 							"            \"collection_desc\": \"\",\r",
 							"            \"resto_ids\": \"1703234,1701384,1704764\",\r",
@@ -1826,7 +1844,7 @@
 							"        },\r",
 							"        {\r",
 							"            \"api_key\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\r",
-							"            \"collection_id\": \"8\",\r",
+							"            \"collection_id\": \"9\",\r",
 							"            \"collection_name\": \"Cita Rasa Bali\",\r",
 							"            \"collection_desc\": \"Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.\",\r",
 							"            \"resto_ids\": \"1703234,1701384,1704764\",\r",
@@ -1836,7 +1854,7 @@
 							"        },\r",
 							"        {\r",
 							"            \"api_key\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\r",
-							"            \"collection_id\": \"8\",\r",
+							"            \"collection_id\": \"9\",\r",
 							"            \"collection_name\": \"Cita Rasa Bali\",\r",
 							"            \"collection_desc\": \"Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.\",\r",
 							"            \"resto_ids\": \"1703234,1701384,1234567\",\r",
@@ -1846,7 +1864,7 @@
 							"        },\r",
 							"        {\r",
 							"            \"api_key\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\r",
-							"            \"collection_id\": \"8\",\r",
+							"            \"collection_id\": \"9\",\r",
 							"            \"collection_name\": \"Cita Rasa Bali\",\r",
 							"            \"collection_desc\": \"Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.\",\r",
 							"            \"resto_ids\": \"1703234,1701384,1704764\",\r",
@@ -1858,6 +1876,7 @@
 							"}\r",
 							"\r",
 							"let currentData = myVar.shift();\r",
+							"pm.environment.set(\"url\", \"localhost:3000\");\r",
 							"pm.environment.set(\"api_key\", currentData[\"api_key\"]);\r",
 							"pm.environment.set(\"collection_id\", currentData[\"collection_id\"]);\r",
 							"pm.environment.set(\"collection_name\", currentData[\"collection_name\"]);\r",
@@ -1877,7 +1896,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "893a90ad-4e96-4d92-8d2a-f818f41f5871",
+						"id": "35bcfd4a-cd83-4712-b5a2-008c5b164cf3",
 						"exec": [
 							"varTest = pm.environment.get(\"update_collection\");\r",
 							"\r",
@@ -1949,338 +1968,6 @@
 				}
 			},
 			"response": [
-				{
-					"name": "ERROR (API Key tidak disertakan atau tidak terdapat di DB)",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "collectionName",
-									"value": "Cita Rasa Bali",
-									"type": "text"
-								},
-								{
-									"key": "collectionDescription",
-									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.",
-									"type": "text"
-								},
-								{
-									"key": "restoIds",
-									"value": "1703234,1701384,1704764",
-									"type": "text"
-								},
-								{
-									"key": "cityId",
-									"value": "170",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"collec",
-								"updateCollection"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": ""
-								}
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "80"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 08:45:20 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
-				},
-				{
-					"name": "SUCCESS",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "collectionName",
-									"value": "Cita Rasa Bali",
-									"type": "text"
-								},
-								{
-									"key": "collectionDescription",
-									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.",
-									"type": "text"
-								},
-								{
-									"key": "restoIds",
-									"value": "1703234,1701384,1704764",
-									"type": "text"
-								},
-								{
-									"key": "cityId",
-									"value": "170",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr&collectionId=5",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"collec",
-								"updateCollection"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
-								},
-								{
-									"key": "collectionId",
-									"value": "5"
-								}
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "59"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"3b-89wbKWfMPCm/c3BSW8DLpDs1ouk\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 09:20:31 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Collection Cita Rasa Jakarta berhasil diubah menjadi Cita Rasa Bali"
-				},
-				{
-					"name": "ERROR (Id kota yang diinputkan tidak terdapat pada zomato)",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "collectionName",
-									"value": "Cita Rasa Bali",
-									"type": "text"
-								},
-								{
-									"key": "collectionDescription",
-									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.",
-									"type": "text"
-								},
-								{
-									"key": "restoIds",
-									"value": "1703234,1701384,1704764",
-									"type": "text"
-								},
-								{
-									"key": "cityId",
-									"value": "1111111",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr&collectionId=4",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"collec",
-								"updateCollection"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
-								},
-								{
-									"key": "collectionId",
-									"value": "4"
-								}
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "108"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"6c-wx25p30GX12ct77GTWVChfp2g7s\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 09:17:28 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Tidak ditemukan kota dengan id tersebut, silahkan kunjungi endpoint /getLocations untuk mengetahui list kota"
-				},
-				{
-					"name": "ERROR (Salah satu atau semua resto id yang disertakan invalid, tidak ada di zomato atau bukan merupakan resto pada kota yang ditentukan)",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "collectionName",
-									"value": "Cita Rasa Bali",
-									"type": "text"
-								},
-								{
-									"key": "collectionDescription",
-									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.",
-									"type": "text"
-								},
-								{
-									"key": "restoIds",
-									"value": "1703234,1701384,99999",
-									"type": "text"
-								},
-								{
-									"key": "cityId",
-									"value": "170",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr&collectionId=4",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"collec",
-								"updateCollection"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
-								},
-								{
-									"key": "collectionId",
-									"value": "4"
-								}
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "93"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"5d-kvwAMcZQDEm3ydbDqsvUmKPaVy4\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 09:15:55 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Resto id yang diinputkan invalid, tidak ditemukan atau bukan merupakan resto di kota tersebut"
-				},
 				{
 					"name": "ERROR (Id collection yang ingin diedit tidak disertakan",
 					"originalRequest": {
@@ -2528,6 +2215,338 @@
 					],
 					"cookie": [],
 					"body": "Collection hanya boleh diedit oleh pemilik collection"
+				},
+				{
+					"name": "SUCCESS",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "collectionName",
+									"value": "Cita Rasa Bali",
+									"type": "text"
+								},
+								{
+									"key": "collectionDescription",
+									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.",
+									"type": "text"
+								},
+								{
+									"key": "restoIds",
+									"value": "1703234,1701384,1704764",
+									"type": "text"
+								},
+								{
+									"key": "cityId",
+									"value": "170",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/collec/updateCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr&collectionId=5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"collec",
+								"updateCollection"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
+								},
+								{
+									"key": "collectionId",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "59"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3b-89wbKWfMPCm/c3BSW8DLpDs1ouk\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 09:20:31 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Collection Cita Rasa Jakarta berhasil diubah menjadi Cita Rasa Bali"
+				},
+				{
+					"name": "ERROR (API Key tidak disertakan atau tidak terdapat di DB)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "collectionName",
+									"value": "Cita Rasa Bali",
+									"type": "text"
+								},
+								{
+									"key": "collectionDescription",
+									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.",
+									"type": "text"
+								},
+								{
+									"key": "restoIds",
+									"value": "1703234,1701384,1704764",
+									"type": "text"
+								},
+								{
+									"key": "cityId",
+									"value": "170",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/collec/updateCollection?apiKey=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"collec",
+								"updateCollection"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "80"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 08:45:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
+				},
+				{
+					"name": "ERROR (Id kota yang diinputkan tidak terdapat pada zomato)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "collectionName",
+									"value": "Cita Rasa Bali",
+									"type": "text"
+								},
+								{
+									"key": "collectionDescription",
+									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.",
+									"type": "text"
+								},
+								{
+									"key": "restoIds",
+									"value": "1703234,1701384,1704764",
+									"type": "text"
+								},
+								{
+									"key": "cityId",
+									"value": "1111111",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/collec/updateCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr&collectionId=4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"collec",
+								"updateCollection"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
+								},
+								{
+									"key": "collectionId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "108"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6c-wx25p30GX12ct77GTWVChfp2g7s\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 09:17:28 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Tidak ditemukan kota dengan id tersebut, silahkan kunjungi endpoint /getLocations untuk mengetahui list kota"
+				},
+				{
+					"name": "ERROR (Salah satu atau semua resto id yang disertakan invalid, tidak ada di zomato atau bukan merupakan resto pada kota yang ditentukan)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "collectionName",
+									"value": "Cita Rasa Bali",
+									"type": "text"
+								},
+								{
+									"key": "collectionDescription",
+									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.",
+									"type": "text"
+								},
+								{
+									"key": "restoIds",
+									"value": "1703234,1701384,99999",
+									"type": "text"
+								},
+								{
+									"key": "cityId",
+									"value": "170",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/collec/updateCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr&collectionId=4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"collec",
+								"updateCollection"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
+								},
+								{
+									"key": "collectionId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "93"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5d-kvwAMcZQDEm3ydbDqsvUmKPaVy4\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 09:15:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Resto id yang diinputkan invalid, tidak ditemukan atau bukan merupakan resto di kota tersebut"
 				}
 			]
 		},
@@ -2537,7 +2556,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "fefdb00c-f423-4904-ae1c-39f9e555034f",
+						"id": "68c21666-a4b4-4519-adc4-4f8896ed7426",
 						"exec": [
 							"myVar = pm.variables.get(\"topup_saldo\");\r",
 							"\r",
@@ -2559,12 +2578,13 @@
 							"            \"api_key\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc \",\r",
 							"            \"nominal\": \"150000\",\r",
 							"            \"return_code\": 200,\r",
-							"            \"return_body\": \"Saldo user free user telah sukses ditambahkan! Saldo sekarang 196800\",\r",
+							"            \"return_body\": \"Saldo user free user telah sukses ditambahkan! Saldo sekarang\",\r",
 							"        }\r",
 							"    ];\r",
 							"}\r",
 							"\r",
 							"let currentData = myVar.shift();\r",
+							"pm.environment.set(\"url\", \"localhost:3000\");\r",
 							"pm.environment.set(\"api_key\", currentData[\"api_key\"]);\r",
 							"pm.environment.set(\"nominal\", currentData[\"nominal\"]);\r",
 							"pm.environment.set(\"return_code\", currentData[\"return_code\"]);\r",
@@ -2578,7 +2598,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "e34083c2-9578-4d32-9f80-225ec4c88e51",
+						"id": "96d7c41d-2b0b-4ee6-b23b-1faa2601c664",
 						"exec": [
 							"varTest = pm.environment.get(\"topup_saldo\");\r",
 							"\r",
@@ -2633,6 +2653,71 @@
 				}
 			},
 			"response": [
+				{
+					"name": "ERROR (Nominal/Jumlah pengisian saldo tidak diberikan atau bernilai <= 0)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nominal",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/user/topupSaldo?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"topupSaldo"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "42"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2a-+uRgFl+9Yd0yLydUDRuqYsx0uoc\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 09:22:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Nominal pengisian saldo tidak boleh kosong"
+				},
 				{
 					"name": "ERROR (API Key tidak diberikan atau tidak terdapat di DB)",
 					"originalRequest": {
@@ -2762,71 +2847,6 @@
 					],
 					"cookie": [],
 					"body": "Saldo user Newest User telah sukses ditambahkan! Saldo sekarang 63000"
-				},
-				{
-					"name": "ERROR (Nominal/Jumlah pengisian saldo tidak diberikan atau bernilai <= 0)",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "nominal",
-									"value": "0",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/api/user/topupSaldo?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"topupSaldo"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
-								}
-							]
-						}
-					},
-					"status": "Bad Request",
-					"code": 400,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "42"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"2a-+uRgFl+9Yd0yLydUDRuqYsx0uoc\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 09:22:40 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Nominal pengisian saldo tidak boleh kosong"
 				}
 			]
 		}

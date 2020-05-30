@@ -29,10 +29,11 @@ function getResto(id){
     };
     request(options, function (error, response) { 
       if (error) reject(error);
-      resolve(response.body);
+      else resolve(response.body);
     });
   });
 }
+
 
 router.get('/getResto', async function(req, res) {
     if(req.query.apiKey == null) res.status(400).send("Field API Key harus terisi");
