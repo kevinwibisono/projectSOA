@@ -35,20 +35,20 @@ function getResto(id){
 }
 
 router.get('/getResto', async function(req, res) {
-    if(req.query.apiKey == null) res.status(400).send("Field API Key harus terisi");
-    else{
-      let cek = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
-      if(cek.length > 0){
-        if(cek[0].apihit > 0) {
-          let hasil = await getResto(req.body.resto_id);
-          let api_hit = cek[0].apihit - 1;
-          let kurang = await executeQuery(`UPDATE usertable SET apihit = ${api_hit} WHERE apiKey = '${req.query.apiKey}'`);
-          res.status(200).send(hasil);
-        }
-        else res.status(401).send("API Hit tidak cukup!");
+  if(req.query.apiKey == null) res.status(400).json({"status":400,"message":"Field API Key harus terisi"});
+  else{
+    let cek = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+    if(cek.length > 0){
+      if(cek[0].apihit > 0) {
+        let api_hit = cek[0].apihit - 1;
+        let kurang = await executeQuery(`UPDATE usertable SET apihit = ${api_hit} WHERE apiKey = '${req.query.apiKey}'`);
+        let hasil = await getResto(req.body.resto_id);
+        res.status(200).send(hasil);
       }
-      else res.status(404).send("API key tidak ditemukan");
+      else res.status(401).json({"status" : 401, "message" :"API hit tidak cukup"});
     }
-  });
+    else res.status(404).json({"status" : 404, "message" :"API key tidak ditemukan"});
+  }
+});
 
 module.exports = router;
