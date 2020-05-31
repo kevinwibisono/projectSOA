@@ -269,13 +269,13 @@ router.get("/getCollection", async function(req, res){
                 if(hasil.length > 0){
                     var apdet = `update usertable set apiHit = apiHit - 1 where apiKey = '${req.query.apiKey}'`;
                     await executeQuery(apdet);
-                    res.status(200).send(hasil);
+                    res.status(200).send({"hasil" : hasil});
                     
                 } 
-                else res.status(200).send("Tidak hasil yang sesuai dengan permintaan");
+                else res.status(200).send({"hasil":"Tidak ada hasil yang sesuai dengan permintaan"});
             }
             else{
-                res.status(401).send("API Hit tidak mencukupi, Api hit sisa" + cekKey[0].apiHit);
+                res.status(401).send("API Hit tidak mencukupi");
             }
         }
         else res.status(404).send("API key tidak ditemukan");
@@ -290,10 +290,14 @@ router.get("/favoriteCollection", async function(req, res){
             if(cekKey[0].apihit > 0){
                 if(req.query.username == null) res.status(400).send("username harus disediakan");
                 else {
-                    var apdet = `update usertable set apiHit = apiHit - 1 where apiKey = '${req.query.apiKey}'`;
-                    await executeQuery(apdet);
-                    let hasil = await executeQuery(`select * from collection where id in (select collection_id from favorite where username = '${req.query.username}')`);
-                    res.status(200).send(hasil);
+                    let teasAkhir = await executeQuery(`SELECT * FROM usertable where username = '${req.query.username}'`);
+                    if(teasAkhir.length > 0){
+                        var apdet = `update usertable set apiHit = apiHit - 1 where apiKey = '${req.query.apiKey}'`;
+                        await executeQuery(apdet);
+                        let hasil = await executeQuery(`select * from collection where id in (select collection_id from favorite where username = '${req.query.username}')`);
+                        res.status(200).send({"hasil" : hasil, "Dari daftar favorit" : req.query.username});
+                    }
+                    else res.status(404).send("Username tidak ditemukan");
                 }
             }
             else res.status(401).send("API Hit tidak mencukupi");
