@@ -163,7 +163,7 @@ router.post("/registerUser", async function(req, res){
                 if(tes.length == 0){
                     var query = `insert into usertable(username,password,nama,picture,apiKey,tipe,saldo,apihit) values('${req.body.username}','${req.body.password}','${req.body.nama}','default.jpg','${randomstring.generate(30)}',0,0,100)`;
                     await executeQuery(query);
-                    res.status(200).send(`User dengan username ${req.body.username} berhasil daftar`);
+                    res.status(201).send(`User dengan username ${req.body.username} berhasil daftar`);
                 }
                 else res.status(403).send("Username telah digunakan");
             }
