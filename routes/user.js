@@ -90,21 +90,22 @@ router.put("/updateProfile", async function(req, res){
 });
 
 router.delete('/deleteUser', async function(req, res) {
+    if(req.query.apiKey == undefined || req.query.apiKey == "") res.status(400).json({"status":400,"message":"Field API Key harus terisi"});
     let cari = await executeQuery(`SELECT * FROM usertable WHERE apikey = '${req.query.apiKey}'`);
     if(cari.length > 0){
-        if(cari[0].tipe == 0){
+        if(cari[0].tipe == 2){
             let hapus = await executeQuery(`DELETE FROM usertable WHERE username = '${req.body.username}'`);
-            res.status(200).send("Berhasil hapus user!");
+            res.status(200).json({"status" : 200, "message":"Berhasil hapus user!"});
         }
         else{
             let carilagi = await executeQuery(`SELECT * FROM usertable WHERE apikey = '${req.query.apiKey}' and username = '${req.body.username}'`);
             if(carilagi.length > 0){
                 let hapus = await executeQuery(`DELETE FROM usertable WHERE username = '${req.body.username}'`);
-                res.status(200).send("Berhasil hapus user!");
+                res.status(200).json({"status" : 200, "message":"Berhasil hapus user!"});
             }
-            else res.status(401).send("User tidak memiliki hak akses untuk menghapus user lain!");
+            else res.status(401).json({"status":401, "message" : "User tidak memiliki hak akses untuk menghapus user lain!"});
         }
-    }else res.status(404).send("User tidak ditemukan!");
+    }else res.status(404).json({"status":404, "message":"User tidak ditemukan!"});
 });
 
 router.put("/getPremium", async function(req, res){
@@ -162,7 +163,7 @@ router.post("/registerUser", async function(req, res){
                 if(tes.length == 0){
                     var query = `insert into usertable(username,password,nama,picture,apiKey,tipe,saldo,apihit) values('${req.body.username}','${req.body.password}','${req.body.nama}','default.jpg','${randomstring.generate(30)}',0,0,100)`;
                     await executeQuery(query);
-                    res.status(200).send(`User dengan username ${req.body.username} berhasil daftar`);
+                    res.status(201).send(`User dengan username ${req.body.username} berhasil daftar`);
                 }
                 else res.status(403).send("Username telah digunakan");
             }

@@ -29,7 +29,7 @@ function getResto(id){
         };
         request(options, function (error, response) { 
             if (error) reject(error);
-            resolve(JSON.parse(response.body));
+            resolve(JSON.parse(response.body).name);
         });
     });
 }
@@ -58,7 +58,7 @@ function getCuisine(id){
         var request = require('request');
         var options = {
         'method': 'GET',
-        'url': `https://developers.zomato.com/api/v2.1/cuisines?apikey=f5f3e074609c32c34acee3f23da47fe0&city_id=${city_id}`
+        'url': `https://developers.zomato.com/api/v2.1/cuisines?apikey=f5f3e074609c32c34acee3f23da47fe0&city_id=${id}`
         };
         request(options, function (error, response) { 
             if (error) reject(error);
@@ -68,7 +68,7 @@ function getCuisine(id){
 }
 
 router.get('/getAllCuisineinCity', async function(req, res) {
-    if(req.query.apiKey == null) res.status(400).send("Field API Key harus terisi");
+    if(req.query.apiKey == null) res.status(400).json({"status":400,"message":"Field API Key harus terisi"});
     else{
       let cek = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
       if(cek.length > 0){
@@ -79,65 +79,71 @@ router.get('/getAllCuisineinCity', async function(req, res) {
             res.status(200).send(hasil);
         }
         else{
-            res.status(401).send("API Hit tidak cukup!");
+            res.status(401).json({"status" : 401, "message" :"API hit tidak cukup"});
         }
       }
-      else res.status(404).send("API key tidak ditemukan");
+      res.status(404).json({"status" : 404, "message" :"API key tidak ditemukan"});
     }
 });
 
 router.post("/likeCollection", async function(req, res) {
-    let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
-    if(result.length > 0){
-        let id = req.body.id_collection;
-        let username = result[0].username;
-        let api_hit = result[0].apihit;
-        let cari = await executeQuery(`SELECT * FROM collection WHERE id = '${id}'`);
-        if(api_hit > 0){
-            if(cari.length > 0){
-                let hasil = await executeQuery(`SELECT * FROM favorite WHERE collection_id = '${id}' and username = '${username}'`);
-                if(hasil.length > 0){
-                    res.status(200).send('User telah memfavorite kan collection!');
+    if(req.query.apiKey == null) res.status(400).json({"status":400,"message":"Field API Key harus terisi"});
+    else{
+        let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+        if(result.length > 0){
+            let id = req.body.id_collection;
+            let username = result[0].username;
+            let api_hit = result[0].apihit;
+            let cari = await executeQuery(`SELECT * FROM collection WHERE id = '${id}'`);
+            if(api_hit > 0){
+                if(cari.length > 0){
+                    let hasil = await executeQuery(`SELECT * FROM favorite WHERE collection_id = '${id}' and username = '${username}'`);
+                    if(hasil.length > 0){
+                        res.status(200).json({"status" : 200, "message" :"User telah memfavorite kan collection!"});
+                    }
+                    else{
+                        let tambah = await executeQuery(`INSERT INTO favorite (collection_id, username) VALUES ('${id}','${username}')`);
+                        api_hit = api_hit - 1;
+                        let kurang = await executeQuery(`UPDATE usertable SET apihit = ${api_hit} WHERE apiKey = '${req.query.apiKey}'`);
+                        res.status(200).json({"status" : 200, "message" :"Berhasil like collection!"});
+                    }
                 }
                 else{
-                    let tambah = await executeQuery(`INSERT INTO favorite (collection_id, username) VALUES ('${id}','${username}')`);
-                    api_hit = api_hit - 1;
-                    let kurang = await executeQuery(`UPDATE usertable SET apihit = ${api_hit} WHERE apiKey = '${req.query.apiKey}'`);
-                    res.status(200).send('Berhasil memfavorite kan collection!');
+                    res.status(404).json({"status" : 404, "message" :"Collection tidak ada"});
                 }
-            }
-            else{
-                res.status(404).send('Collection tidak ada!');
-            }
-        } else res.status(401).send("API hit tidak cukup!");
-        
-    }else{
-        res.status(401).send("API Key invalid!");
+            } res.status(401).json({"status" : 401, "message" :"API hit tidak cukup"});
+            
+        }else{
+            res.status(404).json({"status" : 404, "message" :"API key tidak ditemukan"});
+        }
     }
 });
 
 router.post("/unlikeCollection", async function(req, res) {
-    let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
-    if(result.length > 0){
-        let id = req.body.id_collection;
-        let username = result[0].username;
-        let api_hit = result[0].apihit;
-        if(api_hit > 0){
-            let hasil = await executeQuery(`SELECT * FROM favorite WHERE collection_id = '${id}' and username = '${username}'`);
-            if(hasil.length > 0){
-                let tambah = await executeQuery(`DELETE FROM favorite WHERE collection_id = '${id}' and username = '${username}'`);
-                api_hit = api_hit - 1;
-                let kurang = await executeQuery(`UPDATE usertable SET apihit = ${api_hit} WHERE apiKey = '${req.query.apiKey}'`);
-                res.status(200).send('Berhasil unlike collection!');
+    if(req.query.apiKey == null) res.status(400).json({"status":400,"message":"Field API Key harus terisi"});
+    else{
+        let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
+        if(result.length > 0){
+            let id = req.body.id_collection;
+            let username = result[0].username;
+            let api_hit = result[0].apihit;
+            if(api_hit > 0){
+                let hasil = await executeQuery(`SELECT * FROM favorite WHERE collection_id = '${id}' and username = '${username}'`);
+                if(hasil.length > 0){
+                    let tambah = await executeQuery(`DELETE FROM favorite WHERE collection_id = '${id}' and username = '${username}'`);
+                    api_hit = api_hit - 1;
+                    let kurang = await executeQuery(`UPDATE usertable SET apihit = ${api_hit} WHERE apiKey = '${req.query.apiKey}'`);
+                    res.status(200).json({"status" : 200, "message" :"Berhasil unlike collection!"});
+                }
+                else{
+                    res.status(400).json({"status" : 400, "message" :"User tidak memfavorite kan collection!"});
+                }
             }
-            else{
-                res.status(404).send('User tidak memfavorite kan collection!');
-            }
+            else res.status(401).json({"status" : 401, "message" :"API hit tidak cukup"});
+            
+        }else{
+            res.status(404).json({"status" : 404, "message" :"API key tidak ditemukan"});
         }
-        else res.status(401).send("API hit tidak cukup!");
-        
-    }else{
-        res.status(401).send("API Key invalid!");
     }
 });
 
@@ -254,13 +260,23 @@ router.get("/getCollection", async function(req, res){
     else{
         let cekKey = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
         if(cekKey.length > 0){
-            var city_id = (req.query.location == null) ? '' : req.query.location;
-            var name = (req.query.collectorname == null) ? '' : req.query.collectorname;
-            var keyword = (req.query.keyword == null) ? '' : req.query.keyword;
-            var query = `select * from collection where city_id::text like '${city_id}%' and username like '%${name}%' and (LOWER(collection_name) like LOWER('%${keyword}%') OR LOWER(collection_desc) like LOWER('%${keyword}%'))`;
-            let hasil = await executeQuery(query);
-            if(hasil.length > 0) res.status(200).send(hasil);
-            else res.status(200).send("Tidak hasil yang sesuai dengan permintaan");
+            if(cekKey[0].apihit > 0){
+                var city_id = (req.query.location == null) ? '' : req.query.location;
+                var name = (req.query.collectorname == null) ? '' : req.query.collectorname;
+                var keyword = (req.query.keyword == null) ? '' : req.query.keyword;
+                var query = `select * from collection where city_id::text like '${city_id}%' and username like '%${name}%' and (LOWER(collection_name) like LOWER('%${keyword}%') OR LOWER(collection_desc) like LOWER('%${keyword}%'))`;
+                let hasil = await executeQuery(query);
+                if(hasil.length > 0){
+                    var apdet = `update usertable set apiHit = apiHit - 1 where apiKey = '${req.query.apiKey}'`;
+                    await executeQuery(apdet);
+                    res.status(200).send(hasil);
+                    
+                } 
+                else res.status(200).send("Tidak hasil yang sesuai dengan permintaan");
+            }
+            else{
+                res.status(401).send("API Hit tidak mencukupi, Api hit sisa" + cekKey[0].apiHit);
+            }
         }
         else res.status(404).send("API key tidak ditemukan");
     }
@@ -271,13 +287,18 @@ router.get("/favoriteCollection", async function(req, res){
     else{
         let cekKey = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
         if(cekKey.length > 0){
-            if(req.query.username == null) res.status(400).send("username harus disediakan");
-            else {
-                let hasil = await executeQuery(`select * from collection where id in (select collection_id from favorite where username = '${req.query.username}')`);
-                res.status(200).send(hasil);
+            if(cekKey[0].apihit > 0){
+                if(req.query.username == null) res.status(400).send("username harus disediakan");
+                else {
+                    var apdet = `update usertable set apiHit = apiHit - 1 where apiKey = '${req.query.apiKey}'`;
+                    await executeQuery(apdet);
+                    let hasil = await executeQuery(`select * from collection where id in (select collection_id from favorite where username = '${req.query.username}')`);
+                    res.status(200).send(hasil);
+                }
             }
+            else res.status(401).send("API Hit tidak mencukupi");
         }
-        else res.status(404).send("API key tidak ditemukan");
+        else res.status(400).send("API key tidak ditemukan");
     }
 });
 module.exports = router;
