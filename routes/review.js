@@ -48,8 +48,14 @@ router.post("/addReview", async function(req, res){
             res.status(404).send(`Tidak ditemukan resto dengan id ${req.body.restoId}`);
           }
           else{
-            await executeQuery(`INSERT INTO review(username, resto_id, review) VALUES('${username}', ${req.body.restoId}, '${req.body.review}')`);
-            res.status(200).send(`Review ${nama} terhadap resto ${restoname} berhasil ditambahkan`);
+            if(req.body.reviewId == undefined){
+              await executeQuery(`INSERT INTO review(username, resto_id, review) VALUES('${username}', ${req.body.restoId}, '${req.body.review}')`);
+              res.status(200).send(`Review ${nama} terhadap resto ${restoname} berhasil ditambahkan`);
+            }
+            else{
+              await executeQuery(`INSERT INTO review VALUES(${req.body.reviewId}, '${username}', ${req.body.restoId}, '${req.body.review}')`);
+              res.status(200).send(`Review ${nama} terhadap resto ${restoname} berhasil ditambahkan`);
+            }
           }
         }
     }
