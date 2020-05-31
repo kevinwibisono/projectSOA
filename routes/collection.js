@@ -260,7 +260,7 @@ router.get("/getCollection", async function(req, res){
     else{
         let cekKey = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
         if(cekKey.length > 0){
-            if(cekKey[0].apiHit <= 0){
+            if(cekKey[0].apihit > 0){
                 var city_id = (req.query.location == null) ? '' : req.query.location;
                 var name = (req.query.collectorname == null) ? '' : req.query.collectorname;
                 var keyword = (req.query.keyword == null) ? '' : req.query.keyword;
@@ -275,7 +275,7 @@ router.get("/getCollection", async function(req, res){
                 else res.status(200).send("Tidak hasil yang sesuai dengan permintaan");
             }
             else{
-                res.status(401).send("API Hit tidak mencukupi");
+                res.status(401).send("API Hit tidak mencukupi, Api hit sisa" + cekKey[0].apiHit);
             }
         }
         else res.status(404).send("API key tidak ditemukan");
@@ -287,7 +287,7 @@ router.get("/favoriteCollection", async function(req, res){
     else{
         let cekKey = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
         if(cekKey.length > 0){
-            if(cekKey[0].apiHit <=  0){
+            if(cekKey[0].apihit > 0){
                 if(req.query.username == null) res.status(400).send("username harus disediakan");
                 else {
                     var apdet = `update usertable set apiHit = apiHit - 1 where apiKey = '${req.query.apiKey}'`;
