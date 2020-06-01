@@ -44,6 +44,16 @@ const upload=multer({
         checkFileType(file,cb);
     }
 }).single('myImage');
+function checkFileType(file,cb){
+    const filetypes= /jpeg|jpg|png|gif/;
+    const extname=filetypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype=filetypes.test(file.mimetype);
+    if(mimetype && extname){
+        return cb(null,true);
+    }else{
+        cb('Error: Image Only!');
+    }
+}
 
 router.get("/getUser", async function(req, res){
     let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
