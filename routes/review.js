@@ -37,6 +37,11 @@ function getRestoName(id){
 router.post("/addReview", async function(req, res){
     let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
     if(result.length > 0){
+      let apihit = result[0].apihit;
+      if(apihit <= 0){
+        res.status(400).send("Apihit tidak mencukupi untuk melakukan request");
+      }
+      else{
         let nama = result[0].nama;
         let username = result[0].username;
         if(req.body.restoid == "" || req.body.review == ""){
@@ -48,16 +53,20 @@ router.post("/addReview", async function(req, res){
             res.status(404).send(`Tidak ditemukan resto dengan id ${req.body.restoId}`);
           }
           else{
+            let currapi = apihit -1;
             if(req.body.reviewId == undefined){
               await executeQuery(`INSERT INTO review(username, resto_id, review) VALUES('${username}', ${req.body.restoId}, '${req.body.review}')`);
-              res.status(200).send(`Review ${nama} terhadap resto ${restoname} berhasil ditambahkan`);
+              await executeQuery(`UPDATE usertable SET apihit = apihit - 1 WHERE username = '${username}'`);
+              res.status(200).send(`Review oleh ${nama} terhadap resto ${restoname} berhasil ditambahkan, jumlah api sekarang ${currapi}`);
             }
             else{
               await executeQuery(`INSERT INTO review VALUES(${req.body.reviewId}, '${username}', ${req.body.restoId}, '${req.body.review}')`);
-              res.status(200).send(`Review ${nama} terhadap resto ${restoname} berhasil ditambahkan`);
+              await executeQuery(`UPDATE usertable SET apihit = apihit - 1 WHERE username = '${username}'`);
+              res.status(200).send(`Review oleh ${nama} terhadap resto ${restoname} berhasil ditambahkan, jumlah api sekarang ${currapi}`);
             }
           }
         }
+      }
     }
     else{
         res.status(401).send("Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid");

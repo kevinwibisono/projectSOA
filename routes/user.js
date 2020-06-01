@@ -117,7 +117,7 @@ router.put("/getPremium", async function(req, res){
                 var saldo = result[0].saldo;
                 if(result[0].saldo >= 100000){
                     saldo = saldo - 100000;
-                    let result = await executeQuery(`UPDATE usertable SET tipe = 1, apihit = 10000, saldo = saldo-100000 where apiKey = '${req.query.apiKey}'`);
+                    let result = await executeQuery(`UPDATE usertable SET tipe = 1, apihit = apihit + 10000, saldo = saldo-100000 where apiKey = '${req.query.apiKey}'`);
                     res.status(200).send(`Akun user ${nama} telah diupgrade menjadi premium dan penggunaan api telah ditambahkan. Saldo anda sekarang ${saldo}`);
                 }
                 else{
