@@ -22,9 +22,9 @@ chai.use(chaiHttp);
 
 //     it('Delete user sendiri', (done)=>{
 //         chai.request('http://localhost:3000')
-//         .delete('/api/user/deleteUser?apiKey=KN8mzEqe9w4QVl5BF8TN4WfUGlqZvx')
+//         .delete('/api/user/deleteUser?apiKey=oIHrg1K2BbEvNP1pZGC2xVh7MtNgoU')
 //         .send({
-//             username:"testinguserfree5"
+//             username:"usermatthew6"
 //         })
 //         .end((err, res) => {
 //             res.should.have.status(200);
@@ -39,6 +39,7 @@ chai.use(chaiHttp);
 //         chai.request('http://localhost:3000')
 //         .delete('/api/user/deleteUser?apiKey=az')
 //         .send({
+//              username:"usermatthew6"
 //         })
 //         .end((err, res) => {
 //             res.should.have.status(404);
@@ -51,9 +52,9 @@ chai.use(chaiHttp);
 
 //     it('User biasa menghapus user lain', (done)=>{
 //         chai.request('http://localhost:3000')
-//         .delete('/api/user/deleteUser?apiKey=V536uolnxOXrccmITUpFKHCRXXgSQN')
+//         .delete('/api/user/deleteUser?apiKey=oIHrg1K2BbEvNP1pZGC2xVh7MtNgoU')
 //         .send({
-//             username : "testinguserfree3"
+//             username : "usermatthew5"
 //         })
 //         .end((err, res) => {
 //             res.should.have.status(401);
@@ -107,7 +108,7 @@ chai.use(chaiHttp);
 //     });
 //     it('Search resto valid', (done)=>{
 //         chai.request('http://localhost:3000')
-//             .get('/api/resto/getResto?apiKey=V536uolnxOXrccmITUpFKHCRXXgSQN')
+//             .get('/api/resto/getResto?apiKey=x5iUy6PzGTOjnkxuiQG6OeHNiW8WpL')
 //             .send({
 //                 resto_id : "16774318"
 //             })
@@ -119,7 +120,7 @@ chai.use(chaiHttp);
 //     });
 //     it('API Hit tidak cukup', (done)=>{
 //         chai.request('http://localhost:3000')
-//             .get('/api/resto/getResto?apiKey=XRKtjahQS0r3RnmnHa3flh7pay1w4t')
+//             .get('/api/resto/getResto?apiKey=PGHizyPZKl4K5XpsMjbw4455IiGboH')
 //             .send({
 //                 resto_id : "16774318"
 //             })
@@ -149,7 +150,7 @@ chai.use(chaiHttp);
 //     });
 //     it('Get Review Valid', (done)=>{
 //         chai.request('http://localhost:3000')
-//             .get('/api/review/getReview?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
+//             .get('/api/review/getReview?apiKey=L7JVXQH9Iky0r0tK4Abxk4lwPdWFt6')
 //             .send({
 //             })
 //             .end((err, res) => {
@@ -173,7 +174,7 @@ chai.use(chaiHttp);
 //     });
 //     it('API Hit tidak cukup', (done)=>{
 //         chai.request('http://localhost:3000')
-//             .get('/api/review/getReview?apiKey=XRKtjahQS0r3RnmnHa3flh7pay1w4t')
+//             .get('/api/review/getReview?apiKey=PGHizyPZKl4K5XpsMjbw4455IiGboH')
 //             .send({
 //             })
 //             .end((err, res) => {
@@ -202,7 +203,7 @@ chai.use(chaiHttp);
 //     });
 //     it('Berhasil like collection', (done)=>{
 //         chai.request('http://localhost:3000')
-//             .post('/api/collec/likeCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
+//             .post('/api/collec/likeCollection?apiKey=L7JVXQH9Iky0r0tK4Abxk4lwPdWFt6')
 //             .send({
 //                 id_collection : "9"
 //             })
@@ -216,7 +217,7 @@ chai.use(chaiHttp);
 //     });
 //     it('Collection sudah dilike', (done)=>{
 //         chai.request('http://localhost:3000')
-//             .post('/api/collec/likeCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
+//             .post('/api/collec/likeCollection?apiKey=L7JVXQH9Iky0r0tK4Abxk4lwPdWFt6')
 //             .send({
 //                 id_collection : "9"
 //             })
@@ -244,7 +245,7 @@ chai.use(chaiHttp);
 //     });
 //     it('API Hit tidak cukup', (done)=>{
 //         chai.request('http://localhost:3000')
-//             .post('/api/collec/likeCollection?apiKey=XRKtjahQS0r3RnmnHa3flh7pay1w4t')
+//             .post('/api/collec/likeCollection?apiKey=PGHizyPZKl4K5XpsMjbw4455IiGboH')
 //             .send({
 //                 id_collection : "9"
 //             })
@@ -274,7 +275,7 @@ chai.use(chaiHttp);
 //     });
 //     it('Berhasil unlike collection', (done)=>{
 //         chai.request('http://localhost:3000')
-//             .post('/api/collec/unlikeCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
+//             .post('/api/collec/unlikeCollection?apiKey=L7JVXQH9Iky0r0tK4Abxk4lwPdWFt6')
 //             .send({
 //                 id_collection : "9"
 //             })
@@ -288,7 +289,7 @@ chai.use(chaiHttp);
 //     });
 //     it('Unlike collection yang tidak pernah dilike', (done)=>{
 //         chai.request('http://localhost:3000')
-//             .post('/api/collec/unlikeCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
+//             .post('/api/collec/unlikeCollection?apiKey=L7JVXQH9Iky0r0tK4Abxk4lwPdWFt6')
 //             .send({
 //                 id_collection : "8"
 //             })
@@ -316,7 +317,7 @@ chai.use(chaiHttp);
 //     });
 //     it('API Hit tidak cukup', (done)=>{
 //         chai.request('http://localhost:3000')
-//             .post('/api/collec/unlikeCollection?apiKey=XRKtjahQS0r3RnmnHa3flh7pay1w4t')
+//             .post('/api/collec/unlikeCollection?apiKey=PGHizyPZKl4K5XpsMjbw4455IiGboH')
 //             .send({
 //                 id_collection : "9"
 //             })
@@ -333,7 +334,7 @@ chai.use(chaiHttp);
 describe('/api/collec/getAllCuisineinCity', () =>{
     it('API Key tidak valid', (done)=>{
         chai.request('http://localhost:3000')
-            .get('/api/collec/getAllCuisineinCity?apiKey=')
+            .get('/api/collec/getAllCuisineinCity?apiKey=az')
             .send({
                 city_id : "280"
             })
@@ -361,7 +362,7 @@ describe('/api/collec/getAllCuisineinCity', () =>{
     });
     it('API Hit tidak cukup', (done)=>{
         chai.request('http://localhost:3000')
-            .get('/api/collec/getAllCuisineinCity?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
+            .get('/api/collec/getAllCuisineinCity?apiKey=PGHizyPZKl4K5XpsMjbw4455IiGboH')
             .send({
                 city_id : "280"
             })
@@ -375,7 +376,7 @@ describe('/api/collec/getAllCuisineinCity', () =>{
     });
     it('Berhasil dapatkan semua cuisine dalam satu kota', (done)=>{
         chai.request('http://localhost:3000')
-            .get('/api/collec/getAllCuisineinCity?apiKey=XRKtjahQS0r3RnmnHa3flh7pay1w4t')
+            .get('/api/collec/getAllCuisineinCity?apiKey=L7JVXQH9Iky0r0tK4Abxk4lwPdWFt6')
             .send({
                 city_id : "280"
             })
