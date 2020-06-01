@@ -48,8 +48,14 @@ router.post("/addReview", async function(req, res){
             res.status(404).send(`Tidak ditemukan resto dengan id ${req.body.restoId}`);
           }
           else{
-            await executeQuery(`INSERT INTO review(username, resto_id, review) VALUES('${username}', ${req.body.restoId}, '${req.body.review}')`);
-            res.status(200).send(`Review ${nama} terhadap resto ${restoname} berhasil ditambahkan`);
+            if(req.body.reviewId == undefined){
+              await executeQuery(`INSERT INTO review(username, resto_id, review) VALUES('${username}', ${req.body.restoId}, '${req.body.review}')`);
+              res.status(200).send(`Review ${nama} terhadap resto ${restoname} berhasil ditambahkan`);
+            }
+            else{
+              await executeQuery(`INSERT INTO review VALUES(${req.body.reviewId}, '${username}', ${req.body.restoId}, '${req.body.review}')`);
+              res.status(200).send(`Review ${nama} terhadap resto ${restoname} berhasil ditambahkan`);
+            }
           }
         }
     }
@@ -83,8 +89,13 @@ router.delete("/deleteReview", async function(req, res){
     if(cek.length > 0){
       if(req.query.reviewId == null) res.status(400).send("ReviewId harus terisi");
       else{
-        await executeQuery(`delete from review where id = '${req.query.reviewId}'`);
-        res.status(200).send(`Review dengan id -> ${req.query.reviewId} telah terhapus`);
+        var tesRev = `select * from review where id = '${req.query.reviewId}'`;
+        let cekRev = await executeQuery(tesRev);
+        if(cekRev > 0){
+          await executeQuery(`delete from review where id = '${req.query.reviewId}'`);
+          res.status(200).send(`Review dengan id -> ${req.query.reviewId} telah terhapus`);
+        }
+        else res.status(404).send("Review tidak ditemukan");
       }
     }
     else res.status(404).send("API key tidak ditemukan");
