@@ -3105,6 +3105,223 @@
 					"body": "Saldo user Newest User telah sukses ditambahkan! Saldo sekarang 63000"
 				}
 			]
+		},
+		{
+			"name": "localhost:3000/loginUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "joel",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "joel",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/loginUser",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"loginUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/user/buySubscription?apikey=XRKtjahQS0r3RnmnHa3flh7pay1w4t",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "testfreeuser2",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "testfree2",
+							"type": "text"
+						},
+						{
+							"key": "jumlahsubscription",
+							"value": "100",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/api/user/buySubscription?apikey=XRKtjahQS0r3RnmnHa3flh7pay1w4t",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"user",
+						"buySubscription"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "XRKtjahQS0r3RnmnHa3flh7pay1w4t"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:4000/api/user/editReview?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "24",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "freeuser",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "free",
+							"type": "text"
+						},
+						{
+							"key": "review",
+							"value": "diedit satukali lho review nya",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/api/user/editReview?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"user",
+						"editReview"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:4000/api/resto/getLocation?apiKey=XRKtjahQS0r3RnmnHa3flh7pay1w4t",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "query",
+							"value": "Jakarya",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/api/resto/getLocation?apiKey=XRKtjahQS0r3RnmnHa3flh7pay1w4t",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"resto",
+						"getLocation"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "XRKtjahQS0r3RnmnHa3flh7pay1w4t"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:4000/api/user/deleteCollection?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "freeuser",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "free",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/api/user/deleteCollection?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"user",
+						"deleteCollection"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
