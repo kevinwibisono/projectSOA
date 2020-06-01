@@ -23,6 +23,28 @@ function executeQuery(query){
     });
 }
 
+//function cek api key
+function executeQuery(query){
+    return new Promise(function(resolve, reject){
+      client.query(query, (err, res) => {
+        if(err) reject(err);
+        else resolve(res.rows);
+      });
+    });
+}
+const storage=multer.diskStorage({
+    destination:'./uploads',
+    filename:function(req,file,cb){
+        cb(null,'xtargetx'+path.extname(file.originalname));
+    }
+});
+const upload=multer({
+    storage:storage,
+    fileFilter: function(req,file,cb){
+        checkFileType(file,cb);
+    }
+}).single('myImage');
+
 router.get("/getUser", async function(req, res){
     let result = await executeQuery(`SELECT * FROM usertable where apiKey = '${req.query.apiKey}'`);
     if(result.length > 0){
