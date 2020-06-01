@@ -171,11 +171,11 @@ router.post("/registerUser", async function(req, res){
     }
 });
 
-router.delete('/editReview', async function(req, res) {
+router.post('/editReview', async function(req, res) {
     if(req.query.apikey) {
         apikey = req.query.apikey;
     }
-    if(req.query.apiKey == undefined){
+    if(req.query.apikey == undefined){
         res.status(401).send("APIKey not found. You are not authorized");
     }else{
         var id = req.body.id;
@@ -194,6 +194,7 @@ router.delete('/editReview', async function(req, res) {
                     if(result1.length > 0){
                         var query = `update review set review = '${review}' where id = '${id}'`
                         let res = await executeQuery(query);
+                        res.status(200).json("Telah Merubah Review / Comment!");
                     }else{
                         res.status(400).json("Tidak dapat menemukan Review / Comment!");
                     }
@@ -207,8 +208,9 @@ router.delete('/editReview', async function(req, res) {
                     if(result1.length > 0){
                         var query = `update review set review = '${review}' where id = '${id}'`
                         let res = await executeQuery(query);
-                        var query1 = `update usertable set apihit = -1 where username = '${usertab}'`                    
+                        var query1 = `update usertable set apihit = apihit - 1 where username = '${usertab}'`                    
                         let res1 = await executeQuery(query1);
+                        res.status(200).json("Telah Merubah Review / Comment!");
                     }else{
                         res.status(400).json("Tidak dapat menemukan Review / Comment!");
                     }
@@ -225,7 +227,7 @@ router.post('/loginUser', async function(req, res) {
     if(cari.length > 0){
         res.status(400).send("User tidak ditemukan!");
     }else {
-        var apikey = cari[0].apiKey;
+        var apikey = cari[0].apikey;
         res.status(200).send("Berhasil Login, API anda = " + apikey);
     }   
 });
@@ -234,12 +236,12 @@ router.post('/buySubscription', async function(req, res) {
     if(req.query.apikey) {
         apikey = req.query.apikey;
     }
-    if(req.query.apiKey == undefined){
-        res.status(401).send("APIKey not found. You are not authorized");
+    if(req.query.apikey == undefined){
+        res.status(404).send("APIKey not found. You are not authorized");
     }else{
-        let result = await executeQuery(`SELECT * FROM usertable where username = '${req.query.username}' and password = '${req.query.password}'`);   
+        let result = await executeQuery(`SELECT * FROM usertable where username = '${req.body.username}' and password = '${req.body.password}'`);   
         if(result[0].apikey != apikey) {
-            res.status(400).json("api key invalid"); 
+            res.status(404).json("api key invalid"); 
         }else if( result.length > 0){    
             if(result[0].tipe == 2){
                 res.status(400).send("Anda sebagai Admin");
@@ -250,8 +252,9 @@ router.post('/buySubscription', async function(req, res) {
                 if(saldo_user >= 75){
                     var total      = jumlah * 75;
                     var sisa_saldo = saldo_user - total;
-                    query = `update usertable set apihit = apihit + '${total}' , saldo  = saldo + '${sisa_saldo}' where username = '${req.query.username}'`                    
+                    query = `update usertable set apihit = apihit + '${jumlah}' , saldo  = '${sisa_saldo}' where username = '${req.body.username}'`                    
                     let res = await executeQuery(query);
+                    res.status(200).json("Berhasil Menambah APIHIT"); 
                 }else{
                     res.status(400).json("Saldo user tidak mencukupi"); 
                 }
@@ -260,11 +263,11 @@ router.post('/buySubscription', async function(req, res) {
     }
 });
 
-router.post('/deleteCollection', async function(req, res) {
+router.delete('/deleteCollection', async function(req, res) {
     if(req.query.apikey) {
         apikey = req.query.apikey;
     }
-    if(req.query.apiKey == undefined){
+    if(req.query.apikey == undefined){
         res.status(401).send("APIKey not found. You are not authorized");
     }else{
         var id = req.body.id;
@@ -282,8 +285,9 @@ router.post('/deleteCollection', async function(req, res) {
                     if(result1.length > 0){
                         var query = `DELETE FROM collection WHERE id = '${id}'`
                         let res = await executeQuery(query);
+                        res.status(200).json("Berhasil menghapus Collection!");
                     }else{
-                        res.status(400).json("Tidak dapat menemukan Review / Comment!");
+                        res.status(400).json("Tidak dapat menemukan Collection!");
                     }
                 }
             }else{
@@ -297,8 +301,9 @@ router.post('/deleteCollection', async function(req, res) {
                         let res = await executeQuery(query);
                         var query1 = `update usertable set apihit = -1 where username = '${usertab}'`                    
                         let res1 = await executeQuery(query1);
+                        res.status(200).json("Berhasil menghapus Collection!");
                     }else{
-                        res.status(400).json("Tidak dapat menemukan Review / Comment!");
+                        res.status(400).json("Tidak dapat menemukan Collection!");
                     }
                 }
             }            
