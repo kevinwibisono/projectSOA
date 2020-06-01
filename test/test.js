@@ -361,7 +361,7 @@ describe('/api/collec/getAllCuisineinCity', () =>{
     });
     it('API Hit tidak cukup', (done)=>{
         chai.request('http://localhost:3000')
-            .get('/api/collec/getAllCuisineinCity?apiKey=XRKtjahQS0r3RnmnHa3flh7pay1w4t')
+            .get('/api/collec/getAllCuisineinCity?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
             .send({
                 city_id : "280"
             })
@@ -380,7 +380,7 @@ describe('/api/collec/getAllCuisineinCity', () =>{
                 city_id : "280"
             })
             .end((err, res) => {
-                res.should.have.status(401);
+                res.should.have.status(200);
                 res.body.should.be.a('object');
                 done();
             })
