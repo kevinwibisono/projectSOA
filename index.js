@@ -15,6 +15,6 @@ app.use('/api/resto', resto);
 
 require('dotenv').config();
 
-app.listen(3000, function(){
-    console.log(`listening port 3000...`);
+app.listen(4000, function(){
+    console.log(`listening port 4000...`);
 });
