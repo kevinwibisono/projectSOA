@@ -48,11 +48,11 @@ function getRestoPremium(id,q,cuisine){
     var request = require('request');
     if(id != "")
       url = `entity_id=${id}&entity_type=city`;
-    if(q != ""){
+    else if(q != ""){
       if(url != "") url = url + `&q=${q}`;
       else url = `q=${q}`;
     }
-    if(cuisine != ""){
+    else if(cuisine != ""){
       if(url != "") url = url + `&cuisines=${cuisine}`;
       else url = `cuisines=${cuisine}`;
     }
