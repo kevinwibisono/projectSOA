@@ -427,7 +427,7 @@ describe('/api/user/loginUser', () =>{
 describe('/api/user/buySubscription', () =>{
     it('API key Not Found', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .post('/api/user/buySubscriptioin')
+            .post('/api/user/buySubscription')
             .send({
             })
             .end((err, res) => {
@@ -441,7 +441,7 @@ describe('/api/user/buySubscription', () =>{
     
 	 it('Sebagai Admin', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .post('/api/user/buySubscriptioin?apikey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1')
+            .post('/api/user/buySubscription?apikey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1')
             .send({
                 username:"admin",
                 password : "admin"
@@ -457,7 +457,7 @@ describe('/api/user/buySubscription', () =>{
 	
 	it('Tambah APIHIT', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .post('/api/user/buySubscriptioin?apikey=XRKtjahQS0r3RnmnHa3flh7pay1w4t')
+            .post('/api/user/buySubscription?apikey=XRKtjahQS0r3RnmnHa3flh7pay1w4t')
             .send({
                 username:"testfreeuser2",
                 password:"testfree2"
@@ -473,7 +473,7 @@ describe('/api/user/buySubscription', () =>{
 	
 	it('Saldo Tidak Cukup', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .post('/api/user/buySubscriptioin?apikey=V536uolnxOXrccmITUpFKHCRXXgSQN')
+            .post('/api/user/buySubscription?apikey=V536uolnxOXrccmITUpFKHCRXXgSQN')
             .send({
                 username:"testinguserfree4",
                 password: "123"
@@ -492,13 +492,13 @@ describe('/api/user/buySubscription', () =>{
 describe('/api/user/deleteCollection', () =>{
     it('API key Not Found', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .post('/api/user/deleteCollection')
+            .delete('/api/collec/deleteCollection')
             .send({
             })
             .end((err, res) => {
-                res.should.have.status(404);
+                res.should.have.status(400);
                 res.body.should.be.a('object');
-                res.body.should.have.property('status').eql(404);
+                res.body.should.have.property('status').eql(400);
                 res.body.should.have.property('message').eql("APIKey not found. You are not authorized");
                 done();
             })
@@ -506,7 +506,7 @@ describe('/api/user/deleteCollection', () =>{
 	
 	 it('Sebagai Admin', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .delete('/api/user/deleteCollection?apikey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1')
+            .delete('/api/collec/deleteCollection?apikey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1')
             .send({
                 id : "15"
             })
@@ -521,7 +521,7 @@ describe('/api/user/deleteCollection', () =>{
     
     it('Tidak dapat menemukan collection admin', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .delete('/api/user/deleteCollection?apikey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1')
+            .delete('/api/collec/deleteCollection?apikey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1')
             .send({
                 id : "x"
             })
@@ -536,7 +536,7 @@ describe('/api/user/deleteCollection', () =>{
 	
 	it('User biasa', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .delete('/api/user/deleteCollection?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
+            .delete('/api/collec/deleteCollection?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
             .send({
                 id : '13'
             })
@@ -551,7 +551,7 @@ describe('/api/user/deleteCollection', () =>{
     
     it('Tidak dapat menemukan collection user', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .delete('/api/user/deleteCollection?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
+            .delete('/api/collec/deleteCollection?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
             .send({
                 id : "x"
             })
@@ -566,7 +566,7 @@ describe('/api/user/deleteCollection', () =>{
     
     it('Tidak dapat menemukan user', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .delete('/api/user/deleteCollection?apikey=z')
+            .delete('/api/collec/deleteCollection?apikey=z')
             .send({
                 usertab:"joe",
                 id : "x"
@@ -665,13 +665,13 @@ describe('/api/user/editReview', () =>{
 describe('/api/resto/getLocation', () =>{
     it('API key Invalid', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .get('/api/user/getLocation?apikey=')
+            .get('/api/resto/getLocation?apikey=')
             .send({
             })
             .end((err, res) => {
-                res.should.have.status(404);
+                res.should.have.status(400);
                 res.body.should.be.a('object');
-                res.body.should.have.property('status').eql(404);
+                res.body.should.have.property('status').eql(400);
                 res.body.should.have.property('message').eql("Field API Key harus terisi");
                 done();
             })
@@ -679,7 +679,7 @@ describe('/api/resto/getLocation', () =>{
 	
     it('API Hit tidak ditemukan', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .get('/api/review/getLocation?apiKey=x')
+            .get('/api/resto/getLocation?apiKey=x')
             .send({
                 query:"x"
             })
@@ -694,7 +694,7 @@ describe('/api/resto/getLocation', () =>{
     
     it('API Hit tidak cukup', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .get('/api/review/getLocation?apiKey=GfI2Y8CdpgCQPFrygAxK7vchY5eyF2')
+            .get('/api/resto/getLocation?apiKey=GfI2Y8CdpgCQPFrygAxK7vchY5eyF2')
             .send({
                 query:"indonesia"
             })
