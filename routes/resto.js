@@ -29,6 +29,9 @@ function getRestoFree(q){
   else{
     query = "cafe";
   }
+  if(req.body.city_id != undefined || req.body.cuisine != undefined){
+    res.status(400).json({"status":400, "message" : "Free user tidak bisa mengakses fitur ini!"});
+  }
   return new Promise(function(resolve, reject){
     var request = require('request');
     var options = {
