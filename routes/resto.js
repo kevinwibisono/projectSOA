@@ -48,15 +48,15 @@ function getRestoPremium(id,q,cuisine){
     var request = require('request');
     if(id != "")
       url = `entity_id=${id}&entity_type=city`;
-    else if(q != ""){
+    if(q != ""){
       if(url != "") url = url + `&q=${q}`;
       else url = `q=${q}`;
     }
-    else if(cuisine != ""){
+    if(cuisine != ""){
       if(url != "") url = url + `&cuisines=${cuisine}`;
       else url = `cuisines=${cuisine}`;
     }
-    else{
+    if(id == "" && q == "" && cuisine == "" || id == undefined && q == undefined && cuisine == undefined){
       url = `cuisines=25`
     }
     var options = {
