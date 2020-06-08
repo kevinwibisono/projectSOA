@@ -29,9 +29,6 @@ function getRestoFree(q){
   else{
     query = "cafe";
   }
-  if(req.body.city_id != undefined || req.body.cuisine != undefined){
-    res.status(400).json({"status":400, "message" : "Free user tidak bisa mengakses fitur ini!"});
-  }
   return new Promise(function(resolve, reject){
     var request = require('request');
     var options = {
@@ -115,8 +112,13 @@ router.get('/getResto', async function(req, res) {
         if(cek[0].tipe == 0){
           let api_hit = cek[0].apihit - 1;
           let kurang = await executeQuery(`UPDATE usertable SET apihit = ${api_hit} WHERE apiKey = '${req.query.apiKey}'`);
-          let hasil = await getRestoFree(req.body.query);
-          res.status(200).send(hasil);
+          if(req.body.city_id != undefined || req.body.cuisine != undefined){
+            res.status(400).json({"status":400, "message" : "Free user tidak bisa mengakses fitur ini!"});
+          }
+          else{
+            let hasil = await getRestoFree(req.body.query);
+            res.status(200).send(hasil);
+          }
         }
         if(cek[0].tipe == 1){
           let api_hit = cek[0].apihit - 1;
