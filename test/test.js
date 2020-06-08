@@ -335,96 +335,99 @@ chai.use(chaiHttp);
 describe('/api/collec/getAllCuisineinCity', () =>{
     it('API Key tidak valid', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .get('/api/collec/getAllCuisineinCity?apiKey=az')
-            .send({
-                city_id : "280"
-            })
-            .end((err, res) => {
-                res.should.have.status(404);
-                res.body.should.be.a('object');
-                res.body.should.have.property('status').eql(404);
-                res.body.should.have.property('message').eql("API key tidak ditemukan");
-                done();
-            })
+        .get('/api/collec/getAllCuisineinCity?apiKey=az')
+        .send({
+            city_id : "280"
+        })
+        .end((err, res) => {
+            res.should.have.status(404);
+            res.body.should.be.a('object');
+            res.body.should.have.property('status').eql(404);
+            res.body.should.have.property('message').eql("API key tidak ditemukan");
+            done();
+        })
     });
     it('Tidak ada API key', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .get('/api/collec/getAllCuisineinCity')
-            .send({
-                city_id : "280"
-            })
-            .end((err, res) => {
-                res.should.have.status(400);
-                res.body.should.be.a('object');
-                res.body.should.have.property('status').eql(400);
-                res.body.should.have.property('message').eql("Field API Key harus terisi");
-                done();
-            })
+        .get('/api/collec/getAllCuisineinCity')
+        .send({
+            city_id : "280"
+        })
+        .end((err, res) => {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('status').eql(400);
+            res.body.should.have.property('message').eql("Field API Key harus terisi");
+            done();
+        })
     });
     it('API Hit tidak cukup', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .get('/api/collec/getAllCuisineinCity?apiKey=PGHizyPZKl4K5XpsMjbw4455IiGboH')
-            .send({
-                city_id : "280"
-            })
-            .end((err, res) => {
-                res.should.have.status(401);
-                res.body.should.be.a('object');
-                res.body.should.have.property('status').eql(401);
-                res.body.should.have.property('message').eql("API hit tidak cukup");
-                done();
-            })
+        .get('/api/collec/getAllCuisineinCity?apiKey=PGHizyPZKl4K5XpsMjbw4455IiGboH')
+        .send({
+            city_id : "280"
+        })
+        .end((err, res) => {
+            res.should.have.status(401);
+            res.body.should.be.a('object');
+            res.body.should.have.property('status').eql(401);
+            res.body.should.have.property('message').eql("API hit tidak cukup");
+            done();
+        })
     });
     it('Berhasil dapatkan semua cuisine dalam satu kota', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .get('/api/collec/getAllCuisineinCity?apiKey=L7JVXQH9Iky0r0tK4Abxk4lwPdWFt6')
-            .send({
-                city_id : "280"
-            })
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                done();
-            })
+        .get('/api/collec/getAllCuisineinCity?apiKey=L7JVXQH9Iky0r0tK4Abxk4lwPdWFt6')
+        .send({
+            city_id : "280"
+        })
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            done();
+        })
     });
 });
-
+/////////////////////////////////////////////////////////////////////
 //joel
 describe('/api/user/loginUser', () =>{
     it('User Tidak Ada', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .post('/api/user/buySubscriptioin?username=ax&password=ax')
-            .send({
-            })
-            .end((err, res) => {
-                res.should.have.status(400);
-                res.body.should.be.a('object');
-                res.body.should.have.property('status').eql(400);
-                res.body.should.have.property('message').eql("User tidak ditemukan!");
-                done();
-            })
+        .post('/api/user/loginUser')
+        .send({
+            username : 'ax',
+            password : 'ax'
+        })
+        .end((err, res) => {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('status').eql(400);
+            res.body.should.have.property('message').eql("User tidak ditemukan!");
+            done();
+        })
 	});
 	
 	 it('Berhasil Login', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .post('/api/user/buySubscriptioin?username=freeuser&password=free')
-            .send({
-                username:"freeuser"
-            })
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.should.have.property('status').eql(200);
-                res.body.should.have.property('message').eql("Berhasil Login");
-                done();
-            })
+        .post('/api/user/loginUser')
+        .send({
+            username:"freeuser",
+            password : 'free'
+        })
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('status').eql(200);
+            res.body.should.have.property('message').eql("Berhasil Login, API anda = Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc");
+            done();
+        })
 	});
 });
-
+/////////////////////////////////////////////////////////////////////
 describe('/api/user/buySubscription', () =>{
-    it('API key Invalid', (done)=>{
+    it('API key Not Found', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .post('/api/user/buySubscriptioin?apikey=')
+            .post('/api/user/buySubscriptioin')
             .send({
             })
             .end((err, res) => {
@@ -434,13 +437,14 @@ describe('/api/user/buySubscription', () =>{
                 res.body.should.have.property('message').eql("APIKey not found. You are not authorized");
                 done();
             })
-	});
-	
+    });
+    
 	 it('Sebagai Admin', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
             .post('/api/user/buySubscriptioin?apikey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1')
             .send({
-                username:"admin"
+                username:"admin",
+                password : "admin"
             })
             .end((err, res) => {
                 res.should.have.status(400);
@@ -455,7 +459,8 @@ describe('/api/user/buySubscription', () =>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
             .post('/api/user/buySubscriptioin?apikey=XRKtjahQS0r3RnmnHa3flh7pay1w4t')
             .send({
-                username:"testfreeuser2"
+                username:"testfreeuser2",
+                password:"testfree2"
             })
             .end((err, res) => {
                 res.should.have.status(200);
@@ -470,7 +475,8 @@ describe('/api/user/buySubscription', () =>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
             .post('/api/user/buySubscriptioin?apikey=V536uolnxOXrccmITUpFKHCRXXgSQN')
             .send({
-                username:"testinguserfree4"
+                username:"testinguserfree4",
+                password: "123"
             })
             .end((err, res) => {
                 res.should.have.status(400);
@@ -482,10 +488,11 @@ describe('/api/user/buySubscription', () =>{
 	});
 });
 
+/////////////////////////////////////////////////////////////////////
 describe('/api/user/deleteCollection', () =>{
-    it('API key Invalid', (done)=>{
+    it('API key Not Found', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .delete('/api/user/buySubscriptioin?apikey=')
+            .post('/api/user/deleteCollection')
             .send({
             })
             .end((err, res) => {
@@ -495,13 +502,13 @@ describe('/api/user/deleteCollection', () =>{
                 res.body.should.have.property('message').eql("APIKey not found. You are not authorized");
                 done();
             })
-	});
+    });
 	
 	 it('Sebagai Admin', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .delete('/api/user/buySubscriptioin?username=admin&password=admin&id=8')
+            .delete('/api/user/deleteCollection?apikey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1')
             .send({
-                username:"admin"
+                id : "15"
             })
             .end((err, res) => {
                 res.should.have.status(200);
@@ -512,11 +519,11 @@ describe('/api/user/deleteCollection', () =>{
             })
     });
     
-    it('Tidak dapat menemukan collection', (done)=>{
+    it('Tidak dapat menemukan collection admin', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .delete('/api/user/buySubscriptioin?username=admin&password=admin&id=')
+            .delete('/api/user/deleteCollection?apikey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1')
             .send({
-                username:"admin"
+                id : "x"
             })
             .end((err, res) => {
                 res.should.have.status(400);
@@ -529,9 +536,9 @@ describe('/api/user/deleteCollection', () =>{
 	
 	it('User biasa', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .delete('/api/user/buySubscriptioin?username=testfreeuser2&password=testfree2&id=8')
+            .delete('/api/user/deleteCollection?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
             .send({
-                username:"testfreeuser2"
+                id : '13'
             })
             .end((err, res) => {
                 res.should.have.status(200);
@@ -540,59 +547,44 @@ describe('/api/user/deleteCollection', () =>{
                 res.body.should.have.property('message').eql("Berhasil menghapus Collection!");
                 done();
             })
-	});
-});
-
-describe('/api/user/editReview', () =>{
-    it('API key Invalid', (done)=>{
-        chai.request('http://restaurant-api-2020.herokuapp.com')
-            .post('/api/user/buySubscriptioin?apikey=')
-            .send({
-            })
-            .end((err, res) => {
-                res.should.have.status(404);
-                res.body.should.be.a('object');
-                res.body.should.have.property('status').eql(404);
-                res.body.should.have.property('message').eql("APIKey not found. You are not authorized");
-                done();
-            })
-	});
-	
-	it('Ubah Review', (done)=>{
-        chai.request('http://restaurant-api-2020.herokuapp.com')
-            .post('/api/user/buySubscriptioin?username=freeuser&password=free&id=24')
-            .send({
-                username:"freeuser"
-            })
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.should.have.property('status').eql(200);
-                res.body.should.have.property('message').eql("Telah Merubah Review / Comment!");
-                done();
-            })
     });
     
-    it('Ubah Review', (done)=>{
+    it('Tidak dapat menemukan collection user', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .post('/api/user/buySubscriptioin?username=freeuser&password=free&id=')
+            .delete('/api/user/deleteCollection?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
             .send({
-                username:"freeuser"
+                id : "x"
             })
             .end((err, res) => {
                 res.should.have.status(400);
                 res.body.should.be.a('object');
                 res.body.should.have.property('status').eql(400);
-                res.body.should.have.property('message').eql("Tidak dapat menemukan Review / Comment!");
+                res.body.should.have.property('message').eql("Tidak dapat menemukan Collection!");
                 done();
             })
     });
+    
+    it('Tidak dapat menemukan user', (done)=>{
+        chai.request('http://restaurant-api-2020.herokuapp.com')
+            .delete('/api/user/deleteCollection?apikey=z')
+            .send({
+                usertab:"joe",
+                id : "x"
+            })
+            .end((err, res) => {
+                res.should.have.status(400);
+                res.body.should.be.a('object');
+                res.body.should.have.property('status').eql(400);
+                res.body.should.have.property('message').eql("Tidak dapat menemukan USER!");
+                done();
+            })
+	});
 });
-
-describe('/api/resto/getLocation', () =>{
+/////////////////////////////////////////////////////////////////////
+describe('/api/user/editReview', () =>{
     it('API key Invalid', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .get('/api/user/buySubscriptioin?apikey=')
+            .post('/api/user/editReview?')
             .send({
             })
             .end((err, res) => {
@@ -602,24 +594,109 @@ describe('/api/resto/getLocation', () =>{
                 res.body.should.have.property('message').eql("APIKey not found. You are not authorized");
                 done();
             })
-	});
+    });
 	
-	it('Get Location Valid', (done)=>{
+	it('Ubah Review admin', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .gett('/api/resto/getLocation?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
+        .post('/api/user/editReview?apikey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1')
+        .send({
+            id:"x",
+            review:"x"
+        })
+        .end((err, res) => {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('status').eql(400);
+            res.body.should.have.property('message').eql("Anda Sebagai Admin");
+            done();
+        })
+    });
+    
+    it('Ubah Review user', (done)=>{
+        chai.request('http://restaurant-api-2020.herokuapp.com')
+        .post('/api/user/editReview?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
+        .send({
+            id:"24",
+            review:"diedit duakali lho review nya"
+        })
+        .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('status').eql(200);
+            res.body.should.have.property('message').eql("Telah Merubah Review / Comment!");
+            done();
+        })
+    });
+
+    it('Ubah Review user', (done)=>{
+        chai.request('http://restaurant-api-2020.herokuapp.com')
+        .post('/api/user/editReview?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
+        .send({
+            id:"x",
+            review:"x"
+        })
+        .end((err, res) => {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('status').eql(400);
+            res.body.should.have.property('message').eql("Tidak dapat menemukan Review / Comment!");
+            done();
+        })
+    });
+
+    it('Ubah Review user', (done)=>{
+        chai.request('http://restaurant-api-2020.herokuapp.com')
+        .post('/api/user/editReview?apikey=x')
+        .send({
+            id:"x",
+            review:"x"
+        })
+        .end((err, res) => {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('status').eql(400);
+            res.body.should.have.property('message').eql("Tidak dapat menemukan USER!");
+            done();
+        })
+    });
+});
+
+////////////////////////////////////////////////////////////////
+describe('/api/resto/getLocation', () =>{
+    it('API key Invalid', (done)=>{
+        chai.request('http://restaurant-api-2020.herokuapp.com')
+            .get('/api/user/getLocation?apikey=')
             .send({
             })
             .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('array');
+                res.should.have.status(404);
+                res.body.should.be.a('object');
+                res.body.should.have.property('status').eql(404);
+                res.body.should.have.property('message').eql("Field API Key harus terisi");
                 done();
             })
-    });
+	});
+	
+    it('API Hit tidak ditemukan', (done)=>{
+        chai.request('http://restaurant-api-2020.herokuapp.com')
+            .get('/api/review/getLocation?apiKey=x')
+            .send({
+                query:"x"
+            })
+            .end((err, res) => {
+            res.should.have.status(404);
+            res.body.should.be.a('object');
+            res.body.should.have.property('status').eql(404);
+            res.body.should.have.property('message').eql("API key tidak ditemukan");
+            done();
+        })
+     });
     
     it('API Hit tidak cukup', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
-            .get('/api/review/getReview?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
+            .get('/api/review/getLocation?apiKey=GfI2Y8CdpgCQPFrygAxK7vchY5eyF2')
             .send({
+                query:"indonesia"
             })
             .end((err, res) => {
             res.should.have.status(401);
@@ -629,4 +706,6 @@ describe('/api/resto/getLocation', () =>{
             done();
         })
      });
+
+     
 });

@@ -5,7 +5,8 @@ require('dotenv').config();
 const { Client } = require('pg');
 
 const client = new Client({
-  connectionString: process.env.DATABASE_URL,
+  //connectionString: process.env.DATABASE_URL,
+  connectionString : "postgres://lfpnnieeczkxuy:1f05bb5f73a4030094852c9a3b7f7b793ad51e88eda77a648598bfc58e4de0a0@ec2-54-81-37-115.compute-1.amazonaws.com:5432/de1fta97koh1rk",
   ssl: {rejectUnauthorized: false},
 });
 
@@ -115,6 +116,62 @@ router.post("/likeCollection", async function(req, res) {
             
         }else{
             res.status(404).json({"status" : 404, "message" :"API key tidak ditemukan"});
+        }
+    }
+});
+
+router.delete('/deleteCollection', async function(req, res) {
+    if(req.query.apikey) {
+        apikey = req.query.apikey;
+    }
+    if(req.query.apikey == undefined){
+        //res.status(401).send("APIKey not found. You are not authorized");
+        res.status(400).json({"status" : 400, "message":"APIKey not found. You are not authorized"});
+    }else{
+        var id = req.body.id;
+
+        let result = await executeQuery(`SELECT * FROM usertable where apikey = '${apikey}'`);
+        if(result.length > 0) {
+            if(result[0].tipe == 2){
+                var usertab = result[0].username;
+                let result1 = await executeQuery(`SELECT * FROM collection where id = '${id}'`);
+                if(result1.length > 0){
+                    var query = `DELETE FROM collection WHERE id = '${id}'`
+                    let res = await executeQuery(query);
+                    //res.status(200).json("Berhasil menghapus Collection!");
+                    res.status(200).json({"status" : 200, "message":"Berhasil menghapus Collection!"});
+
+                    let hasil = await executeQuery(`SELECT * FROM favorite WHERE collection_id = '${id}''`);
+                    if(hasil.length > 0){
+                        let tambah = await executeQuery(`DELETE FROM favorite WHERE collection_id = '${id}'`);
+                    }
+                }else{
+                    //res.status(400).json("Tidak dapat menemukan Collection!");
+                    res.status(400).json({"status" : 400, "message":"Tidak dapat menemukan Collection!"});
+                }
+            }else{
+                var usertab = result[0].username;
+                let result1 = await executeQuery(`SELECT * FROM collection where username = '${usertab}'`);
+                if(result1.length > 0){
+                    var query = `DELETE FROM collection WHERE id = '${id}'`
+                    let res = await executeQuery(query);
+                    var query1 = `update usertable set apihit = -1 where username = '${usertab}'`                    
+                    let res1 = await executeQuery(query1);
+                    
+                    let hasil = await executeQuery(`SELECT * FROM favorite WHERE collection_id = '${id}''`);
+                    if(hasil.length > 0){
+                        let tambah = await executeQuery(`DELETE FROM favorite WHERE collection_id = '${id}'`);
+                    }
+                    //res.status(200).json("Berhasil menghapus Collection!");
+                    res.status(200).json({"status" : 200, "message":"Berhasil menghapus Collection!"});
+                }else{
+                    //res.status(400).json("Tidak dapat menemukan Collection!");
+                    res.status(400).json({"status" : 400, "message":"Tidak dapat menemukan Collection!"});
+                }
+            }            
+        }else{            
+            //res.status(400).json("Tidak dapat menemukan USER!");
+            res.status(400).json({"status" : 400, "message":"Tidak dapat menemukan USER!"});
         }
     }
 });
