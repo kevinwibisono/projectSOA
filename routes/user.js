@@ -224,7 +224,7 @@ router.post('/editReview', async function(req, res) {
 
 router.post('/loginUser', async function(req, res) {
     let cari = await executeQuery(`SELECT * FROM usertable WHERE username = '${req.body.username}' and password ='${req.body.password}'`);
-    if(cari.length > 0){
+    if(cari.length < 0){
         res.status(400).send("User tidak ditemukan!");
     }else {
         var apikey = cari[0].apikey;
