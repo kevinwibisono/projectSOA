@@ -256,13 +256,7 @@ router.post('/editReview', async function(req, res) {
 
 router.post('/loginUser', async function(req, res) {
     let cari = await executeQuery(`SELECT * FROM usertable WHERE username = '${req.body.username}' and password ='${req.body.password}'`);
-<<<<<<< HEAD
-    if(cari.length < 0){
-        res.status(400).send("User tidak ditemukan!");
-    }else {
-=======
     if(cari.length > 0){
->>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
         var apikey = cari[0].apikey;
         res.status(200).send("Berhasil Login, API anda = " + apikey);
     }else {
