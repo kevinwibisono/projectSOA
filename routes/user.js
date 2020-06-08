@@ -9,7 +9,7 @@ require('dotenv').config();
 const { Client } = require('pg');
 
 const client = new Client({
-  connectionString: "postgres://lfpnnieeczkxuy:1f05bb5f73a4030094852c9a3b7f7b793ad51e88eda77a648598bfc58e4de0a0@ec2-54-81-37-115.compute-1.amazonaws.com:5432/de1fta97koh1rk",
+  connectionString: process.env.DATABASE_URL,
   ssl: {rejectUnauthorized: false},
 });
 client.connect();
@@ -21,6 +21,38 @@ function executeQuery(query){
         else resolve(res.rows);
       });
     });
+}
+
+//function cek api key
+function executeQuery(query){
+    return new Promise(function(resolve, reject){
+      client.query(query, (err, res) => {
+        if(err) reject(err);
+        else resolve(res.rows);
+      });
+    });
+}
+const storage=multer.diskStorage({
+    destination:'./uploads',
+    filename:function(req,file,cb){
+        cb(null,'xtargetx'+path.extname(file.originalname));
+    }
+});
+const upload=multer({
+    storage:storage,
+    fileFilter: function(req,file,cb){
+        checkFileType(file,cb);
+    }
+}).single('myImage');
+function checkFileType(file,cb){
+    const filetypes= /jpeg|jpg|png|gif/;
+    const extname=filetypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype=filetypes.test(file.mimetype);
+    if(mimetype && extname){
+        return cb(null,true);
+    }else{
+        cb('Error: Image Only!');
+    }
 }
 
 router.get("/getUser", async function(req, res){
@@ -117,7 +149,7 @@ router.put("/getPremium", async function(req, res){
                 var saldo = result[0].saldo;
                 if(result[0].saldo >= 100000){
                     saldo = saldo - 100000;
-                    let result = await executeQuery(`UPDATE usertable SET tipe = 1, apihit = 10000, saldo = saldo-100000 where apiKey = '${req.query.apiKey}'`);
+                    let result = await executeQuery(`UPDATE usertable SET tipe = 1, apihit = apihit + 10000, saldo = saldo-100000 where apiKey = '${req.query.apiKey}'`);
                     res.status(200).send(`Akun user ${nama} telah diupgrade menjadi premium dan penggunaan api telah ditambahkan. Saldo anda sekarang ${saldo}`);
                 }
                 else{
@@ -224,11 +256,17 @@ router.post('/editReview', async function(req, res) {
 
 router.post('/loginUser', async function(req, res) {
     let cari = await executeQuery(`SELECT * FROM usertable WHERE username = '${req.body.username}' and password ='${req.body.password}'`);
+<<<<<<< HEAD
     if(cari.length < 0){
         res.status(400).send("User tidak ditemukan!");
     }else {
+=======
+    if(cari.length > 0){
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
         var apikey = cari[0].apikey;
         res.status(200).send("Berhasil Login, API anda = " + apikey);
+    }else {
+        res.status(400).send("User tidak ditemukan!");
     }   
 });
 

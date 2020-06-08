@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5e2fc66e-b361-4890-ace2-84408414efbf",
+		"_postman_id": "71d51285-9e15-432f-b6a6-19cf10e94527",
 		"name": "ProyekSOA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,7 +11,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "561f1125-832c-49d9-afb6-c0132413a39c",
+						"id": "e5e46870-f9d2-4cf4-8ce3-b2bb623d5e5c",
 						"exec": [
 							"myVar = pm.variables.get(\"get_user\");\r",
 							"\r",
@@ -37,18 +37,18 @@
 							"        },\r",
 							"        {\r",
 							"            \"api_key\": \"6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1\",\r",
-							"            \"username\": \"freeuser\",\r",
+							"            \"username\": \"testfreeuser1\",\r",
 							"            \"return_code\": 200,\r",
 							"            \"return_body\": [\r",
 							"                {\r",
-							"                    \"username\": \"freeuser\",\r",
-							"                    \"password\": \"free\",\r",
-							"                    \"nama\": \"free user\",\r",
+							"                    \"username\": \"testfreeuser1\",\r",
+							"                    \"password\": \"testfree1\",\r",
+							"                    \"nama\": \"User Testing Free 1\",\r",
 							"                    \"picture\": \"\",\r",
-							"                    \"apikey\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\r",
-							"                    \"tipe\": 1,\r",
-							"                    \"saldo\": 46800,\r",
-							"                    \"apihit\": 10000\r",
+							"                    \"apikey\": \"p6sVF1x79Utkacw9ehwoFAmVC7Dq03\",\r",
+							"                    \"tipe\": 0,\r",
+							"                    \"saldo\": 0,\r",
+							"                    \"apihit\": 0\r",
 							"                }\r",
 							"            ]\r",
 							"        }\r",
@@ -56,7 +56,6 @@
 							"}\r",
 							"\r",
 							"let currentData = myVar.shift();\r",
-							"pm.environment.set(\"url\", \"localhost:3000\");\r",
 							"pm.environment.set(\"api_key\", currentData[\"api_key\"]);\r",
 							"pm.environment.set(\"username\", currentData[\"username\"]);\r",
 							"pm.environment.set(\"return_code\", currentData[\"return_code\"]);\r",
@@ -72,7 +71,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a9c6d7dd-e08c-4a9f-98b3-35e88c787761",
+						"id": "d9f6b64e-7359-4591-8106-0797f242aa16",
 						"exec": [
 							"varTest = pm.environment.get(\"get_user\");\r",
 							"\r",
@@ -105,9 +104,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/user/getUser?apiKey={{api_key}}&username={{username}}",
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/user/getUser?apiKey={{api_key}}&username={{username}}",
+					"protocol": "https",
 					"host": [
-						"{{url}}"
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
 					],
 					"path": [
 						"api",
@@ -127,124 +129,6 @@
 				}
 			},
 			"response": [
-				{
-					"name": "ERROR (Username yang dicari tidak ditemukan pada user manapun di DB)",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/user/getUser?apiKey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1&username=abcdefg",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"getUser"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": "6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1"
-								},
-								{
-									"key": "username",
-									"value": "abcdefg"
-								}
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "25"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"19-4F13PFE8TJsHj796K5Q/WN5bY3k\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 06:30:42 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Data user tidak ditemukan"
-				},
-				{
-					"name": "SUCCESS (User tertentu)",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/user/getUser?apiKey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1&username=freeuser",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"getUser"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": "6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1"
-								},
-								{
-									"key": "username",
-									"value": "freeuser"
-								}
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "155"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"9b-nwQy3krj6hU+3WRkf/6b4WjmWy4\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 06:31:28 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "[\n    {\n        \"username\": \"freeuser\",\n        \"password\": \"free\",\n        \"nama\": \"free user\",\n        \"picture\": \"\",\n        \"apikey\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\n        \"tipe\": 1,\n        \"saldo\": 46800,\n        \"apihit\": 10000\n    }\n]"
-				},
 				{
 					"name": "SUCCESS (Semua User)",
 					"originalRequest": {
@@ -304,6 +188,65 @@
 					],
 					"cookie": [],
 					"body": "[\n    {\n        \"username\": \"admin\",\n        \"password\": \"admin\",\n        \"nama\": \"administrator\",\n        \"picture\": \"\",\n        \"apikey\": \"6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1\",\n        \"tipe\": 2,\n        \"saldo\": 0,\n        \"apihit\": 100\n    },\n    {\n        \"username\": \"freeuser\",\n        \"password\": \"free\",\n        \"nama\": \"free user\",\n        \"picture\": \"\",\n        \"apikey\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\n        \"tipe\": 1,\n        \"saldo\": 46800,\n        \"apihit\": 10000\n    },\n    {\n        \"username\": \"user_kenny\",\n        \"password\": \"123\",\n        \"nama\": \"sobadlul\",\n        \"picture\": \"user_kenny.jpg\",\n        \"apikey\": \"tVRdhPh0ASZDNb97ZpInoBWQV1YLJf\",\n        \"tipe\": 0,\n        \"saldo\": 0,\n        \"apihit\": 100\n    },\n    {\n        \"username\": \"NewUser002\",\n        \"password\": \"new\",\n        \"nama\": \"Newest User\",\n        \"picture\": \"Profile2.jpg\",\n        \"apikey\": \"K8V17j5itJ3qQppBeFEY1oesQYoCPr\",\n        \"tipe\": 1,\n        \"saldo\": 63000,\n        \"apihit\": 10000\n    },\n    {\n        \"username\": \"testfreeuser\",\n        \"password\": \"testfree\",\n        \"nama\": \"User Testing Free\",\n        \"picture\": \"\",\n        \"apikey\": \"p6sVF1x79Utkacw9ehwoFAmVC7Dq03\",\n        \"tipe\": 0,\n        \"saldo\": 0,\n        \"apihit\": 100\n    },\n    {\n        \"username\": \"testfreeuser2\",\n        \"password\": \"testfree2\",\n        \"nama\": \"User Testing Free 2\",\n        \"picture\": \"\",\n        \"apikey\": \"XRKtjahQS0r3RnmnHa3flh7pay1w4t\",\n        \"tipe\": 0,\n        \"saldo\": 100000,\n        \"apihit\": 10000\n    }\n]"
+				},
+				{
+					"name": "SUCCESS (User tertentu)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/getUser?apiKey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1&username=freeuser",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"getUser"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1"
+								},
+								{
+									"key": "username",
+									"value": "freeuser"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "155"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"9b-nwQy3krj6hU+3WRkf/6b4WjmWy4\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 06:31:28 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"username\": \"freeuser\",\n        \"password\": \"free\",\n        \"nama\": \"free user\",\n        \"picture\": \"\",\n        \"apikey\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\n        \"tipe\": 1,\n        \"saldo\": 46800,\n        \"apihit\": 10000\n    }\n]"
 				},
 				{
 					"name": "ERROR (API Key tidak diberikan atau tidak terdapat di DB)",
@@ -366,7 +309,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/getUser?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"raw": "{{url}}/api/user/getUser?apiKey=p6sVF1x79Utkacw9ehwoFAmVC7Dq03",
 							"host": [
 								"{{url}}"
 							],
@@ -378,7 +321,7 @@
 							"query": [
 								{
 									"key": "apiKey",
-									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
+									"value": "p6sVF1x79Utkacw9ehwoFAmVC7Dq03"
 								}
 							]
 						}
@@ -414,6 +357,65 @@
 					],
 					"cookie": [],
 					"body": "Akun anda bukan merupakan akun administrator, anda tidak diijinkan mengakses halaman ini"
+				},
+				{
+					"name": "ERROR (Username yang dicari tidak ditemukan pada user manapun di DB)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/getUser?apiKey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1&username=abcdefg",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"getUser"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1"
+								},
+								{
+									"key": "username",
+									"value": "abcdefg"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"19-4F13PFE8TJsHj796K5Q/WN5bY3k\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 06:30:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Data user tidak ditemukan"
 				}
 			]
 		},
@@ -423,25 +425,11 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "5eb67c6d-5bc0-42b9-9e4a-85653f2acd8a",
+						"id": "44a8dd0e-d7b8-419c-ba8f-edce92451a0d",
 						"exec": [
 							"myVar = pm.variables.get(\"get_premium\");\r",
 							"\r",
 							"if (!myVar || myVar.length <= 0) {\r",
-							"    pm.sendRequest({\r",
-							"        url: 'localhost:3000/api/matkul/',\r",
-							"        method: 'POST',\r",
-							"        body: {\r",
-							"            mode: 'urlencoded',\r",
-							"            urlencoded: [\r",
-							"                {key: 'kode', value: 'xxx', disabled: false},\r",
-							"                {key: 'nama', value: 'yyy', disabled: false},\r",
-							"                {key: 'sks', value: '9', disabled: false}\r",
-							"            ]\r",
-							"        }\r",
-							"    }, function (err, response) {\r",
-							"        console.log(err);\r",
-							"    });\r",
 							"    myVar = [\r",
 							"        {\r",
 							"            \"api_key\": \"\",\r",
@@ -467,7 +455,6 @@
 							"}\r",
 							"\r",
 							"let currentData = myVar.shift();\r",
-							"pm.environment.set(\"url\", \"localhost:3000\");\r",
 							"pm.environment.set(\"api_key\", currentData[\"api_key\"]);\r",
 							"pm.environment.set(\"return_code\", currentData[\"return_code\"]);\r",
 							"pm.environment.set(\"return_body\", currentData[\"return_body\"]);\r",
@@ -480,7 +467,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0907d911-c240-4cce-9e47-6660ee14986a",
+						"id": "8e09ab81-599f-41f3-b6ce-8e9080f48386",
 						"exec": [
 							"varTest = pm.environment.get(\"get_premium\");\r",
 							"\r",
@@ -504,9 +491,12 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/user/getPremium?apiKey={{api_key}}",
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/user/getPremium?apiKey={{api_key}}",
+					"protocol": "https",
 					"host": [
-						"{{url}}"
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
 					],
 					"path": [
 						"api",
@@ -528,7 +518,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/getPremium?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"raw": "{{url}}/api/user/getPremium?apiKey=p6sVF1x79Utkacw9ehwoFAmVC7Dq03",
 							"host": [
 								"{{url}}"
 							],
@@ -540,7 +530,7 @@
 							"query": [
 								{
 									"key": "apiKey",
-									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
+									"value": "p6sVF1x79Utkacw9ehwoFAmVC7Dq03"
 								}
 							]
 						}
@@ -576,61 +566,6 @@
 					],
 					"cookie": [],
 					"body": "Saldo anda belum mencapai harga upgrade akun (Rp 100.000), silahkan akses halaman /api/user/topupSaldo untuk pengisian"
-				},
-				{
-					"name": "ERROR (API Key tidak diberikan atau tidak terdapat di DB)",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/user/getPremium?apiKey=abcdefg",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"getPremium"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": "abcdefg"
-								}
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "80"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 04:17:55 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
 				},
 				{
 					"name": "SUCCESS",
@@ -686,6 +621,61 @@
 					],
 					"cookie": [],
 					"body": "Akun user Newest User telah diupgrade menjadi premium dan penggunaan api telah ditambahkan. Saldo anda sekarang 0"
+				},
+				{
+					"name": "ERROR (API Key tidak diberikan atau tidak terdapat di DB)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/getPremium?apiKey=abcdefg",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"getPremium"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "abcdefg"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "80"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 04:17:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
 				},
 				{
 					"name": "ERROR (API Key yang diberikan bukan merupakan user free)",
@@ -745,12 +735,12 @@
 			]
 		},
 		{
-			"name": "Tambahkan Review Baru (Seluruh Jenis/Tipe User)",
+			"name": "Tambahkan Review Baru",
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "89bed736-211d-427a-81e1-34b87aa1e6f3",
+						"id": "6fe8c1bf-7796-4962-bad2-5121f2f836bc",
 						"exec": [
 							"myVar = pm.variables.get(\"add_review\");\r",
 							"\r",
@@ -778,17 +768,23 @@
 							"            \"return_body\": \"Tidak ditemukan resto dengan id 9999999\",\r",
 							"        },\r",
 							"        {\r",
+							"            \"api_key\": \"p6sVF1x79Utkacw9ehwoFAmVC7Dq03\",\r",
+							"            \"resto_id\": \"1703234\",\r",
+							"            \"review\": \"Resto terbaik di Bali, atau bahkan di Indonesia\",\r",
+							"            \"return_code\": 400,\r",
+							"            \"return_body\": \"Apihit tidak mencukupi\",\r",
+							"        },\r",
+							"        {\r",
 							"            \"api_key\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\r",
 							"            \"resto_id\": \"1703234\",\r",
 							"            \"review\": \"Resto terbaik di Bali, atau bahkan di Indonesia\",\r",
 							"            \"return_code\": 200,\r",
-							"            \"return_body\": \"Review free user terhadap resto Nook berhasil ditambahkan\",\r",
+							"            \"return_body\": \"Review oleh free user terhadap resto Nook berhasil ditambahkan\",\r",
 							"        }\r",
 							"    ];\r",
 							"}\r",
 							"\r",
 							"let currentData = myVar.shift();\r",
-							"pm.environment.set(\"url\", \"localhost:3000\");\r",
 							"pm.environment.set(\"api_key\", currentData[\"api_key\"]);\r",
 							"pm.environment.set(\"resto_id\", currentData[\"resto_id\"]);\r",
 							"pm.environment.set(\"review\", currentData[\"review\"]);\r",
@@ -805,7 +801,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "1d376289-aa32-4650-9b03-fdaff7311030",
+						"id": "3f2e429b-4494-4c04-8258-65e294239b38",
 						"exec": [
 							"varTest = pm.environment.get(\"add_review\");\r",
 							"\r",
@@ -818,7 +814,7 @@
 							"});\r",
 							"\r",
 							"pm.test(\"Return data is correct\", function () {\r",
-							"    pm.response.to.have.body(pm.environment.get(\"return_body\"));\r",
+							"    pm.expect(pm.response.text()).to.include(pm.environment.get(\"return_body\"));\r",
 							"});\r",
 							""
 						],
@@ -842,12 +838,18 @@
 							"value": "{{review}}",
 							"type": "text"
 						}
-					]
+					],
+					"options": {
+						"urlencoded": {}
+					}
 				},
 				"url": {
-					"raw": "{{url}}/api/review/addReview?apiKey={{api_key}}",
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/review/addReview?apiKey={{api_key}}",
+					"protocol": "https",
 					"host": [
-						"{{url}}"
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
 					],
 					"path": [
 						"api",
@@ -863,76 +865,6 @@
 				}
 			},
 			"response": [
-				{
-					"name": "ERROR (API Key tidak diberikan atau tidak terdapat di DB)",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "restoId",
-									"value": "1703234",
-									"type": "text"
-								},
-								{
-									"key": "review",
-									"value": "Tempat terbaik untuk menikmati sunset sambil makan makanan yang terenak",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/api/review/addReview?apiKey=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"review",
-								"addReview"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": ""
-								}
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "80"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 06:39:43 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
-				},
 				{
 					"name": "ERROR (Semua atau salah satu field tidak diisi)",
 					"originalRequest": {
@@ -1004,7 +936,7 @@
 					"body": "Field resto id dan review harus diisi"
 				},
 				{
-					"name": "SUCCESS",
+					"name": "ERROR (API Key tidak diberikan atau tidak terdapat di DB)",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -1024,7 +956,7 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/review/addReview?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"raw": "{{url}}/api/review/addReview?apiKey=",
 							"host": [
 								"{{url}}"
 							],
@@ -1036,7 +968,78 @@
 							"query": [
 								{
 									"key": "apiKey",
-									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "80"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 06:39:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
+				},
+				{
+					"name": "SUCCESS",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "restoId",
+									"value": "1703234",
+									"type": "text"
+								},
+								{
+									"key": "review",
+									"value": "The best of the best!",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/api/review/addReview?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"review",
+								"addReview"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc"
 								}
 							]
 						}
@@ -1055,15 +1058,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "59"
+							"value": "88"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"3b-CEbPNaW5dOND7xXpqexFzv1mFGk\""
+							"value": "W/\"58-G4xuj5ED0pNMmHsLi7z09+ksdnQ\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 18 May 2020 06:43:13 GMT"
+							"value": "Mon, 01 Jun 2020 05:41:42 GMT"
 						},
 						{
 							"key": "Connection",
@@ -1071,7 +1074,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "Review Newest User terhadap resto Nook berhasil ditambahkan"
+					"body": "Review oleh free user terhadap resto Nook berhasil ditambahkan, jumlah api sekarang 9999"
 				},
 				{
 					"name": "ERROR (Resto id yang diinputkan tidak terdapat pada zomato 3rd party API)",
@@ -1142,6 +1145,77 @@
 					],
 					"cookie": [],
 					"body": "Tidak ditemukan resto dengan id 9999999"
+				},
+				{
+					"name": "ERROR (Apihit tidak mencukupi)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "restoId",
+									"value": "1703234",
+									"type": "text"
+								},
+								{
+									"key": "review",
+									"value": "The best of the best!",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/api/review/addReview?apiKey=p6sVF1x79Utkacw9ehwoFAmVC7Dq03",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"review",
+								"addReview"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "p6sVF1x79Utkacw9ehwoFAmVC7Dq03"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2e-4rO2BefCS5v4aFR/IRDIqsIscbQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 01 Jun 2020 05:32:46 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Apihit tidak mencukupi untuk melakukan request"
 				}
 			]
 		},
@@ -1151,7 +1225,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "72dbb419-3351-4e6f-9dbd-ec52669702ad",
+						"id": "3a4e710c-611b-4c8b-9ff1-5b3453fdbfa9",
 						"exec": [
 							"myVar = pm.variables.get(\"add_collection\");\r",
 							"\r",
@@ -1174,7 +1248,8 @@
 							"            \"city_id\": \"74\",\r",
 							"            \"return_code\": 401,\r",
 							"            \"return_body\": \"Akun anda bukan merupakan akun premium, anda tidak diijinkan mengakses halaman ini\",\r",
-							"        },{\r",
+							"        },\r",
+							"        {\r",
 							"            \"api_key\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\r",
 							"            \"collection_name\": \"\",\r",
 							"            \"collection_desc\": \"\",\r",
@@ -1182,7 +1257,8 @@
 							"            \"city_id\": \"74\",\r",
 							"            \"return_code\": 400,\r",
 							"            \"return_body\": \"Seluruh field harus diisi\",\r",
-							"        },{\r",
+							"        },\r",
+							"        {\r",
 							"            \"api_key\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\r",
 							"            \"collection_name\": \"Cita Rasa Jakarta\",\r",
 							"            \"collection_desc\": \"Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Jakarta. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan, restoran yang nagih abis ada disini.\",\r",
@@ -1190,7 +1266,8 @@
 							"            \"city_id\": \"99999\",\r",
 							"            \"return_code\": 404,\r",
 							"            \"return_body\": \"Tidak ditemukan kota dengan id tersebut, silahkan kunjungi endpoint /getLocations untuk mengetahui list kota\",\r",
-							"        },{\r",
+							"        },\r",
+							"        {\r",
 							"            \"api_key\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\r",
 							"            \"collection_name\": \"Cita Rasa Jakarta\",\r",
 							"            \"collection_desc\": \"Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Jakarta. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan, restoran yang nagih abis ada disini.\",\r",
@@ -1198,7 +1275,17 @@
 							"            \"city_id\": \"74\",\r",
 							"            \"return_code\": 404,\r",
 							"            \"return_body\": \"Resto id yang diinputkan invalid, tidak ditemukan atau bukan merupakan resto di kota tersebut\",\r",
-							"        },{\r",
+							"        },\r",
+							"        {\r",
+							"            \"api_key\": \"GfI2Y8CdpgCQPFrygAxK7vchY5eyF2\",\r",
+							"            \"collection_name\": \"Cita Rasa Jakarta\",\r",
+							"            \"collection_desc\": \"Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Jakarta. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan, restoran yang nagih abis ada disini.\",\r",
+							"            \"resto_ids\": \"18560991,7403002,18407143\",\r",
+							"            \"city_id\": \"74\",\r",
+							"            \"return_code\": 400,\r",
+							"            \"return_body\": \"Apihit tidak mencukupi\",\r",
+							"        },\r",
+							"        {\r",
 							"            \"api_key\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\r",
 							"            \"collection_name\": \"Cita Rasa Jakarta\",\r",
 							"            \"collection_desc\": \"Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Jakarta. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan, restoran yang nagih abis ada disini.\",\r",
@@ -1211,7 +1298,6 @@
 							"}\r",
 							"\r",
 							"let currentData = myVar.shift();\r",
-							"pm.environment.set(\"url\", \"localhost:3000\");\r",
 							"pm.environment.set(\"api_key\", currentData[\"api_key\"]);\r",
 							"pm.environment.set(\"collection_name\", currentData[\"collection_name\"]);\r",
 							"pm.environment.set(\"collection_desc\", currentData[\"collection_desc\"]);\r",
@@ -1230,7 +1316,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "67da883f-0d11-4acb-858c-8b4bcc208d80",
+						"id": "353a6533-8afb-49a4-9179-d2ddfb6b2f72",
 						"exec": [
 							"varTest = pm.environment.get(\"add_collection\");\r",
 							"\r",
@@ -1243,7 +1329,7 @@
 							"});\r",
 							"\r",
 							"pm.test(\"Return data is correct\", function () {\r",
-							"    pm.response.to.have.body(pm.environment.get(\"return_body\"));\r",
+							"    pm.expect(pm.response.text()).to.include(pm.environment.get(\"return_body\"));\r",
 							"});\r",
 							""
 						],
@@ -1277,12 +1363,18 @@
 							"value": "{{city_id}}",
 							"type": "text"
 						}
-					]
+					],
+					"options": {
+						"urlencoded": {}
+					}
 				},
 				"url": {
-					"raw": "{{url}}/api/collec/addCollection?apiKey={{api_key}}",
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/addCollection?apiKey={{api_key}}",
+					"protocol": "https",
 					"host": [
-						"{{url}}"
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
 					],
 					"path": [
 						"api",
@@ -1298,6 +1390,328 @@
 				}
 			},
 			"response": [
+				{
+					"name": "ERROR (Apihit tidak cukup)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "collectionName",
+									"value": "Best fo Bandung",
+									"type": "text"
+								},
+								{
+									"key": "collectionDescription",
+									"value": "Collection of the best restaurants in Bandung",
+									"type": "text"
+								},
+								{
+									"key": "restoIds",
+									"value": "18387851,18405613,18403125,18602626,18619623",
+									"type": "text"
+								},
+								{
+									"key": "cityId",
+									"value": "11052",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/api/collec/addCollection?apiKey=GfI2Y8CdpgCQPFrygAxK7vchY5eyF2",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"collec",
+								"addCollection"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "GfI2Y8CdpgCQPFrygAxK7vchY5eyF2"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2e-4rO2BefCS5v4aFR/IRDIqsIscbQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 01 Jun 2020 06:19:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Apihit tidak mencukupi untuk melakukan request"
+				},
+				{
+					"name": "ERROR (Semua atau salah satu resto id yang diinputkan invalid, tidak ada dalam zomato atau bukan merupakan resto di kota dengan id yang diberikan)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "collectionName",
+									"value": "Cita Rasa Jakarta",
+									"type": "text"
+								},
+								{
+									"key": "collectionDescription",
+									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Jakarta. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan, restoran yang nagih abis ada disini.",
+									"type": "text"
+								},
+								{
+									"key": "restoIds",
+									"value": "18560991,7403002,99999",
+									"type": "text"
+								},
+								{
+									"key": "cityId",
+									"value": "74",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/collec/addCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"collec",
+								"addCollection"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "93"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5d-kvwAMcZQDEm3ydbDqsvUmKPaVy4\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 08:37:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Resto id yang diinputkan invalid, tidak ditemukan atau bukan merupakan resto di kota tersebut"
+				},
+				{
+					"name": "ERROR (API Key tidak disertakan atau tidak tersedia di DB)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "collectionName",
+									"value": "Cita Rasa Jakarta",
+									"type": "text"
+								},
+								{
+									"key": "collectionDescription",
+									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Jakarta. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan, restoran yang nagih abis ada disini.",
+									"type": "text"
+								},
+								{
+									"key": "restoIds",
+									"value": "18560991,7403002,18407143",
+									"type": "text"
+								},
+								{
+									"key": "cityId",
+									"value": "74",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/collec/addCollection?apiKey=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"collec",
+								"addCollection"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "80"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 08:34:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
+				},
+				{
+					"name": "SUCCESS",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "collectionName",
+									"value": "Best fo Bandung",
+									"type": "text"
+								},
+								{
+									"key": "collectionDescription",
+									"value": "Collection of the best restaurants in Bandung",
+									"type": "text"
+								},
+								{
+									"key": "restoIds",
+									"value": "18387851,18405613,18403125,18602626,18619623",
+									"type": "text"
+								},
+								{
+									"key": "cityId",
+									"value": "11052",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/api/collec/addCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"collec",
+								"addCollection"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "101"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"65-c/Ee3mZQZK98EEBTLQvLCRieLpc\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 01 Jun 2020 06:17:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Pembuatan collection Best fo Bandung oleh user free user berhasil dilakukan, jumlah api sekarang 9998"
+				},
 				{
 					"name": "ERROR (id kota yang diberikan tidak terdapat pada zomato 3rd party API)",
 					"originalRequest": {
@@ -1537,246 +1951,6 @@
 					],
 					"cookie": [],
 					"body": "Seluruh field harus diisi"
-				},
-				{
-					"name": "ERROR (Semua atau salah satu resto id yang diinputkan invalid, tidak ada dalam zomato atau bukan merupakan resto di kota dengan id yang diberikan)",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "collectionName",
-									"value": "Cita Rasa Jakarta",
-									"type": "text"
-								},
-								{
-									"key": "collectionDescription",
-									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Jakarta. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan, restoran yang nagih abis ada disini.",
-									"type": "text"
-								},
-								{
-									"key": "restoIds",
-									"value": "18560991,7403002,99999",
-									"type": "text"
-								},
-								{
-									"key": "cityId",
-									"value": "74",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/api/collec/addCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"collec",
-								"addCollection"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
-								}
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "93"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"5d-kvwAMcZQDEm3ydbDqsvUmKPaVy4\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 08:37:27 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Resto id yang diinputkan invalid, tidak ditemukan atau bukan merupakan resto di kota tersebut"
-				},
-				{
-					"name": "ERROR (API Key tidak disertakan atau tidak tersedia di DB)",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "collectionName",
-									"value": "Cita Rasa Jakarta",
-									"type": "text"
-								},
-								{
-									"key": "collectionDescription",
-									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Jakarta. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan, restoran yang nagih abis ada disini.",
-									"type": "text"
-								},
-								{
-									"key": "restoIds",
-									"value": "18560991,7403002,18407143",
-									"type": "text"
-								},
-								{
-									"key": "cityId",
-									"value": "74",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/api/collec/addCollection?apiKey=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"collec",
-								"addCollection"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": ""
-								}
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "80"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 08:34:22 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
-				},
-				{
-					"name": "SUCCESS",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "collectionName",
-									"value": "Cita Rasa Jakarta",
-									"type": "text"
-								},
-								{
-									"key": "collectionDescription",
-									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Jakarta. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan, restoran yang nagih abis ada disini.",
-									"type": "text"
-								},
-								{
-									"key": "restoIds",
-									"value": "18560991,7403002,18407143",
-									"type": "text"
-								},
-								{
-									"key": "cityId",
-									"value": "74",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/api/collec/addCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"collec",
-								"addCollection"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
-								}
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "79"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"4f-2eTcG1fETFRyGkKc5HwTKzlCa6w\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 08:40:30 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Pembuatan collection Cita Rasa Jakarta oleh user Newest User berhasil dilakukan"
 				}
 			]
 		},
@@ -1786,7 +1960,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "72b77621-a535-4282-aeca-ad39005aaf69",
+						"id": "614c43ee-92c6-4072-a864-73832345914c",
 						"exec": [
 							"myVar = pm.variables.get(\"update_collection\");\r",
 							"\r",
@@ -1863,6 +2037,16 @@
 							"            \"return_body\": \"Resto id yang diinputkan invalid, tidak ditemukan atau bukan merupakan resto di kota tersebut\",\r",
 							"        },\r",
 							"        {\r",
+							"            \"api_key\": \"GfI2Y8CdpgCQPFrygAxK7vchY5eyF2\",\r",
+							"            \"collection_id\": \"14\",\r",
+							"            \"collection_name\": \"Cita Rasa Bali\",\r",
+							"            \"collection_desc\": \"Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.\",\r",
+							"            \"resto_ids\": \"1703234,1701384,1704764\",\r",
+							"            \"city_id\": \"170\",\r",
+							"            \"return_code\": 400,\r",
+							"            \"return_body\": \"Apihit tidak mencukupi\",\r",
+							"        },\r",
+							"        {\r",
 							"            \"api_key\": \"Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc\",\r",
 							"            \"collection_id\": \"9\",\r",
 							"            \"collection_name\": \"Cita Rasa Bali\",\r",
@@ -1876,7 +2060,6 @@
 							"}\r",
 							"\r",
 							"let currentData = myVar.shift();\r",
-							"pm.environment.set(\"url\", \"localhost:3000\");\r",
 							"pm.environment.set(\"api_key\", currentData[\"api_key\"]);\r",
 							"pm.environment.set(\"collection_id\", currentData[\"collection_id\"]);\r",
 							"pm.environment.set(\"collection_name\", currentData[\"collection_name\"]);\r",
@@ -1896,7 +2079,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "35bcfd4a-cd83-4712-b5a2-008c5b164cf3",
+						"id": "0e32a696-da7c-4882-b2c2-3f0effdbc56b",
 						"exec": [
 							"varTest = pm.environment.get(\"update_collection\");\r",
 							"\r",
@@ -1909,7 +2092,7 @@
 							"});\r",
 							"\r",
 							"pm.test(\"Return data is correct\", function () {\r",
-							"    pm.response.to.have.body(pm.environment.get(\"return_body\"));\r",
+							"    pm.expect(pm.response.text()).to.include(pm.environment.get(\"return_body\"));\r",
 							"});\r",
 							""
 						],
@@ -1943,12 +2126,18 @@
 							"value": "{{city_id}}",
 							"type": "text"
 						}
-					]
+					],
+					"options": {
+						"urlencoded": {}
+					}
 				},
 				"url": {
-					"raw": "{{url}}/api/collec/updateCollection?apiKey={{api_key}}&collectionId={{collection_id}}",
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/updateCollection?apiKey={{api_key}}&collectionId={{collection_id}}",
+					"protocol": "https",
 					"host": [
-						"{{url}}"
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
 					],
 					"path": [
 						"api",
@@ -1969,7 +2158,7 @@
 			},
 			"response": [
 				{
-					"name": "ERROR (Id collection yang ingin diedit tidak disertakan",
+					"name": "ERROR (API Key tidak disertakan atau tidak terdapat di DB)",
 					"originalRequest": {
 						"method": "PUT",
 						"header": [],
@@ -1999,7 +2188,7 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+							"raw": "{{url}}/api/collec/updateCollection?apiKey=",
 							"host": [
 								"{{url}}"
 							],
@@ -2011,7 +2200,7 @@
 							"query": [
 								{
 									"key": "apiKey",
-									"value": "Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc"
+									"value": ""
 								}
 							]
 						}
@@ -2030,15 +2219,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "71"
+							"value": "80"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"47-clxQYoSZgKKrGTfiwPksTIBhta4\""
+							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 18 May 2020 08:48:25 GMT"
+							"value": "Mon, 18 May 2020 08:45:20 GMT"
 						},
 						{
 							"key": "Connection",
@@ -2046,91 +2235,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "Pada halaman ini harus disertakan id dari collection yang ingin di-edit"
-				},
-				{
-					"name": "ERROR (Id collection yang diberikan tidak terdapat di DB)",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "collectionName",
-									"value": "Cita Rasa Bali",
-									"type": "text"
-								},
-								{
-									"key": "collectionDescription",
-									"value": "Koleksi ini menggambarakan restoran-restoran populer dan istimewa di Bali. Daftar-daftar restoran reccommended, restoran yang bikin ketagihan ada disini.",
-									"type": "text"
-								},
-								{
-									"key": "restoIds",
-									"value": "1703234,1701384,1704764",
-									"type": "text"
-								},
-								{
-									"key": "cityId",
-									"value": "170",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc&collectionId=9999",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"collec",
-								"updateCollection"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": "Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc"
-								},
-								{
-									"key": "collectionId",
-									"value": "9999"
-								}
-							]
-						}
-					},
-					"status": "Not Found",
-					"code": 404,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "41"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"29-uNRbYR7grcHZ4tCwDG819O7nDmw\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 08:50:03 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Tidak ditemukan collection dengan id 9999"
+					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
 				},
 				{
 					"name": "ERROR (API Key yang diberikan bukan milik pembuat/pemilik collection)",
@@ -2217,7 +2322,7 @@
 					"body": "Collection hanya boleh diedit oleh pemilik collection"
 				},
 				{
-					"name": "SUCCESS",
+					"name": "ERROR (Salah satu atau semua resto id yang disertakan invalid, tidak ada di zomato atau bukan merupakan resto pada kota yang ditentukan)",
 					"originalRequest": {
 						"method": "PUT",
 						"header": [],
@@ -2236,7 +2341,7 @@
 								},
 								{
 									"key": "restoIds",
-									"value": "1703234,1701384,1704764",
+									"value": "1703234,1701384,99999",
 									"type": "text"
 								},
 								{
@@ -2247,7 +2352,7 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr&collectionId=5",
+							"raw": "{{url}}/api/collec/updateCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr&collectionId=4",
 							"host": [
 								"{{url}}"
 							],
@@ -2263,7 +2368,92 @@
 								},
 								{
 									"key": "collectionId",
-									"value": "5"
+									"value": "4"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "93"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5d-kvwAMcZQDEm3ydbDqsvUmKPaVy4\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 09:15:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Resto id yang diinputkan invalid, tidak ditemukan atau bukan merupakan resto di kota tersebut"
+				},
+				{
+					"name": "SUCCESS",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "collectionName",
+									"value": "Best of Bandung",
+									"type": "text"
+								},
+								{
+									"key": "collectionDescription",
+									"value": "Collection of the best restaurants in Bandung",
+									"type": "text"
+								},
+								{
+									"key": "restoIds",
+									"value": "18405613,18403125,18602626",
+									"type": "text"
+								},
+								{
+									"key": "cityId",
+									"value": "11052",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/api/collec/updateCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc&collectionId=13",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"collec",
+								"updateCollection"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc"
+								},
+								{
+									"key": "collectionId",
+									"value": "13"
 								}
 							]
 						}
@@ -2282,15 +2472,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "59"
+							"value": "92"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"3b-89wbKWfMPCm/c3BSW8DLpDs1ouk\""
+							"value": "W/\"5c-1PYefKt6psQrgW5XpzJTEEL9p/I\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 18 May 2020 09:20:31 GMT"
+							"value": "Mon, 01 Jun 2020 06:24:12 GMT"
 						},
 						{
 							"key": "Connection",
@@ -2298,10 +2488,10 @@
 						}
 					],
 					"cookie": [],
-					"body": "Collection Cita Rasa Jakarta berhasil diubah menjadi Cita Rasa Bali"
+					"body": "Collection Best fo Bandung berhasil diubah menjadi Best of Bandung, jumlah api sekarang 9997"
 				},
 				{
-					"name": "ERROR (API Key tidak disertakan atau tidak terdapat di DB)",
+					"name": "ERROR (Id collection yang ingin diedit tidak disertakan",
 					"originalRequest": {
 						"method": "PUT",
 						"header": [],
@@ -2331,7 +2521,7 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=",
+							"raw": "{{url}}/api/collec/updateCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
 							"host": [
 								"{{url}}"
 							],
@@ -2343,7 +2533,7 @@
 							"query": [
 								{
 									"key": "apiKey",
-									"value": ""
+									"value": "Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc"
 								}
 							]
 						}
@@ -2362,15 +2552,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "80"
+							"value": "71"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
+							"value": "W/\"47-clxQYoSZgKKrGTfiwPksTIBhta4\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 18 May 2020 08:45:20 GMT"
+							"value": "Mon, 18 May 2020 08:48:25 GMT"
 						},
 						{
 							"key": "Connection",
@@ -2378,7 +2568,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
+					"body": "Pada halaman ini harus disertakan id dari collection yang ingin di-edit"
 				},
 				{
 					"name": "ERROR (Id kota yang diinputkan tidak terdapat pada zomato)",
@@ -2465,7 +2655,92 @@
 					"body": "Tidak ditemukan kota dengan id tersebut, silahkan kunjungi endpoint /getLocations untuk mengetahui list kota"
 				},
 				{
-					"name": "ERROR (Salah satu atau semua resto id yang disertakan invalid, tidak ada di zomato atau bukan merupakan resto pada kota yang ditentukan)",
+					"name": "ERROR (Apihit tidak mencukupi)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "collectionName",
+									"value": "Best of Bandung",
+									"type": "text"
+								},
+								{
+									"key": "collectionDescription",
+									"value": "Collection of the best restaurants in Bandung",
+									"type": "text"
+								},
+								{
+									"key": "restoIds",
+									"value": "18405613,18403125,18602626",
+									"type": "text"
+								},
+								{
+									"key": "cityId",
+									"value": "11052",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/api/collec/updateCollection?apiKey=GfI2Y8CdpgCQPFrygAxK7vchY5eyF2&collectionId=14",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"collec",
+								"updateCollection"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": "GfI2Y8CdpgCQPFrygAxK7vchY5eyF2"
+								},
+								{
+									"key": "collectionId",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2e-4rO2BefCS5v4aFR/IRDIqsIscbQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 01 Jun 2020 06:24:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Apihit tidak mencukupi untuk melakukan request"
+				},
+				{
+					"name": "ERROR (Id collection yang diberikan tidak terdapat di DB)",
 					"originalRequest": {
 						"method": "PUT",
 						"header": [],
@@ -2484,7 +2759,7 @@
 								},
 								{
 									"key": "restoIds",
-									"value": "1703234,1701384,99999",
+									"value": "1703234,1701384,1704764",
 									"type": "text"
 								},
 								{
@@ -2495,7 +2770,7 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr&collectionId=4",
+							"raw": "{{url}}/api/collec/updateCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc&collectionId=9999",
 							"host": [
 								"{{url}}"
 							],
@@ -2507,11 +2782,11 @@
 							"query": [
 								{
 									"key": "apiKey",
-									"value": "K8V17j5itJ3qQppBeFEY1oesQYoCPr"
+									"value": "Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc"
 								},
 								{
 									"key": "collectionId",
-									"value": "4"
+									"value": "9999"
 								}
 							]
 						}
@@ -2530,15 +2805,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "93"
+							"value": "41"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"5d-kvwAMcZQDEm3ydbDqsvUmKPaVy4\""
+							"value": "W/\"29-uNRbYR7grcHZ4tCwDG819O7nDmw\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 18 May 2020 09:15:55 GMT"
+							"value": "Mon, 18 May 2020 08:50:03 GMT"
 						},
 						{
 							"key": "Connection",
@@ -2546,17 +2821,17 @@
 						}
 					],
 					"cookie": [],
-					"body": "Resto id yang diinputkan invalid, tidak ditemukan atau bukan merupakan resto di kota tersebut"
+					"body": "Tidak ditemukan collection dengan id 9999"
 				}
 			]
 		},
 		{
-			"name": "Topup Saldo (Seluruh Jenis/Tipe User)",
+			"name": "Topup Saldo",
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "68c21666-a4b4-4519-adc4-4f8896ed7426",
+						"id": "85759688-100e-4ce9-9cac-188a8b30342b",
 						"exec": [
 							"myVar = pm.variables.get(\"topup_saldo\");\r",
 							"\r",
@@ -2584,7 +2859,6 @@
 							"}\r",
 							"\r",
 							"let currentData = myVar.shift();\r",
-							"pm.environment.set(\"url\", \"localhost:3000\");\r",
 							"pm.environment.set(\"api_key\", currentData[\"api_key\"]);\r",
 							"pm.environment.set(\"nominal\", currentData[\"nominal\"]);\r",
 							"pm.environment.set(\"return_code\", currentData[\"return_code\"]);\r",
@@ -2598,7 +2872,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "96d7c41d-2b0b-4ee6-b23b-1faa2601c664",
+						"id": "974a9b69-2d65-4b83-b5f6-069b186b16bb",
 						"exec": [
 							"varTest = pm.environment.get(\"topup_saldo\");\r",
 							"\r",
@@ -2635,9 +2909,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/user/topupSaldo?apiKey={{api_key}}",
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/user/topupSaldo?apiKey={{api_key}}",
+					"protocol": "https",
 					"host": [
-						"{{url}}"
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
 					],
 					"path": [
 						"api",
@@ -2719,71 +2996,6 @@
 					"body": "Nominal pengisian saldo tidak boleh kosong"
 				},
 				{
-					"name": "ERROR (API Key tidak diberikan atau tidak terdapat di DB)",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "nominal",
-									"value": "25000",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/api/user/topupSaldo?apiKey=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"user",
-								"topupSaldo"
-							],
-							"query": [
-								{
-									"key": "apiKey",
-									"value": ""
-								}
-							]
-						}
-					},
-					"status": "Unauthorized",
-					"code": 401,
-					"_postman_previewlanguage": "html",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "text/html; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "80"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 18 May 2020 09:21:27 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
-				},
-				{
 					"name": "SUCCESS",
 					"originalRequest": {
 						"method": "PUT",
@@ -2847,8 +3059,939 @@
 					],
 					"cookie": [],
 					"body": "Saldo user Newest User telah sukses ditambahkan! Saldo sekarang 63000"
+				},
+				{
+					"name": "ERROR (API Key tidak diberikan atau tidak terdapat di DB)",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nominal",
+									"value": "25000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/user/topupSaldo?apiKey=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"topupSaldo"
+							],
+							"query": [
+								{
+									"key": "apiKey",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "80"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"50-bo2sYaWv/njxoyY1aSxCJOcDPyM\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 18 May 2020 09:21:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Anda tidak diijinkan mengakses halaman ini. API key tidak diberikan atau invalid"
 				}
 			]
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "joel",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "joel",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/user/loginUser",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"loginUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buy Subscription (Topup apihit)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "testfreeuser2",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "testfree2",
+							"type": "text"
+						},
+						{
+							"key": "jumlahsubscription",
+							"value": "100",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/user/buySubscription?apikey=XRKtjahQS0r3RnmnHa3flh7pay1w4t",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"buySubscription"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "XRKtjahQS0r3RnmnHa3flh7pay1w4t"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Review",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "24",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "freeuser",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "free",
+							"type": "text"
+						},
+						{
+							"key": "review",
+							"value": "diedit satukali lho review nya",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/user/editReview?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"editReview"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get City Information & ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "query",
+							"value": "Jakarya",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/resto/getLocation?apiKey=XRKtjahQS0r3RnmnHa3flh7pay1w4t",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"resto",
+						"getLocation"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "XRKtjahQS0r3RnmnHa3flh7pay1w4t"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Collection",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "freeuser",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "free",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/user/deleteCollection?apikey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"deleteCollection"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "usermatthew7",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/user/deleteUser?apiKey=851TOxMQE70JNiBOwDOYxjnpkE9Cfj",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"deleteUser"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "851TOxMQE70JNiBOwDOYxjnpkE9Cfj"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Cuisine in City",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "city_id",
+							"value": "280",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/getAllCuisineinCity?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"collec",
+						"getAllCuisineinCity"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Resto",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "resto_id",
+							"value": "16774318",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/resto/getResto?apiKey=oIHrg1K2BbEvNP1pZGC2xVh7MtNgoU",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"resto",
+						"getResto"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "oIHrg1K2BbEvNP1pZGC2xVh7MtNgoU"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lihat semua review",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/review/getReview?apiKey=oIHrg1K2BbEvNP1pZGC2xVh7MtNgoU",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"review",
+						"getReview"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "oIHrg1K2BbEvNP1pZGC2xVh7MtNgoU"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like Collection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id_collection",
+							"value": "8",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/likeCollection?apiKey=oIHrg1K2BbEvNP1pZGC2xVh7MtNgoU",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"collec",
+						"likeCollection"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "oIHrg1K2BbEvNP1pZGC2xVh7MtNgoU"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unlike Collection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id_collection",
+							"value": "8",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/unlikeCollection?apiKey=oIHrg1K2BbEvNP1pZGC2xVh7MtNgoU",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"collec",
+						"unlikeCollection"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "oIHrg1K2BbEvNP1pZGC2xVh7MtNgoU"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Review",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4491fe15-c50b-48f5-a971-4fa30a407ab4",
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'localhost:3000/api/review/addReview',\r",
+							"    method: 'POST',\r",
+							"    body: {\r",
+							"        mode: 'urlencoded',\r",
+							"        urlencoded: [\r",
+							"            { key: 'apiKey', value: 'Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc', disabled: false },\r",
+							"            { key: 'restoId', value: 1703234, disabled: false },\r",
+							"            { key: 'username', value: 'freeuser', disabled: false },\r",
+							"            { key: 'review', value: 'Ini Testing deleteReview', disabled: false },\r",
+							"            { key: 'reviewId', value: 10, disabled: false }\r",
+							"        ]\r",
+							"    }\r",
+							"}, function (err, response) {\r",
+							"    console.log(err);\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"delete_id\", 10);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "482e5029-801f-465a-99da-090ba7870e95",
+						"exec": [
+							"pm.test(\"Berhasil menghapus review\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Respon Benar\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Review dengan id -> 10 telah terhapus\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Terdapat Field kosong\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"API Key terdaftar di Database\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"API key tidak ditemukan\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tes tidak ditemukannya review\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Review tidak ditemukan\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/review/deleteReview?apiKey={{api_key_kenny}}&reviewId={{delete_id}}",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"review",
+						"deleteReview"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "{{api_key_kenny}}"
+						},
+						{
+							"key": "reviewId",
+							"value": "{{delete_id}}"
+						}
+					]
+				},
+				"description": "Menghapus review pengguna.\r\nResponse akan mengembalikan konfirmasi dengan informasi id review yang terhapus"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Collection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a19f7d00-4a02-4a4c-9beb-1f68c4ae4a71",
+						"exec": [
+							"pm.test(\"Berhasil mengambil Collection\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Hasil menampikan sesuai dengan user yang dicari\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"freeuser\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"API Hit pengguna tidak mencukupi\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"API Hit tidak mencukupi\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"API Key terdaftar di Database\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"API key tidak ditemukan\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Pengecekan Pemberian API Key\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/getCollection?apiKey={{api_key_kenny}}&location=74&name=free&keyword=cita",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"collec",
+						"getCollection"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "{{api_key_kenny}}"
+						},
+						{
+							"key": "location",
+							"value": "74"
+						},
+						{
+							"key": "name",
+							"value": "free"
+						},
+						{
+							"key": "keyword",
+							"value": "cita"
+						}
+					]
+				},
+				"description": "Memberiakn list collection yang memenuhi permintaan dari seluruh collection yang ada. parameter yang wajib ada adalah apiKey, sedangkan location name keyword merupakan parameter optional. Hasil pencarian tidak case sensitif.\r\n\r\nResponse akan mengembalikan detail dari selurh daftar koleksi user.\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Favorit Collection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4d006b42-ed9f-49fe-b422-456f4bac9a16",
+						"exec": [
+							"pm.test(\"Berhasil mengambil Daftar Favorit\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tes Pemilik Daftar Favorit\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[\"Dari daftar favorit\"]).to.eql(\"user_kenny\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tes API Hit pengguna tidak mencukupi\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"API Hit tidak mencukupi\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tes API Key terdaftar di Database\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Username tidak ditemukan\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tes username terdaftar di Database\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"API key tidak ditemukan\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tes Pengecekan Pemberian API Key\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/favoriteCollection?apiKey={{api_key_kenny}}&username=user_kenny",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"collec",
+						"favoriteCollection"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "{{api_key_kenny}}"
+						},
+						{
+							"key": "username",
+							"value": "user_kenny"
+						}
+					]
+				},
+				"description": "Memberikan list collection favorit seorang user.\r\nList collection yang dihasilkan berdasarkan koleksi favorit user parameter username.\r\n\r\nResponse akan mengembalikan Response berupa daftar koleksi favorit dari user yang ditentukan."
+			},
+			"response": []
+		},
+		{
+			"name": "Register User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fe41eb2f-18ed-45fa-aa84-1c79eb2bac10",
+						"exec": [
+							"pm.test(\"Berhasil Mendaftarkan User\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Testing jika ada field sosong\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Testing Jika username kembar\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\" : \"freeuser_1\",\r\n\t\"nama\" : \"dummy_testing\",\r\n\t\"password\" : \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/user/registerUser",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"registerUser"
+					]
+				},
+				"description": "Mendaftarkan akun baru pengguna yang baru daftar.\r\n\r\nResponse akan mengembalikan konfirmasi mengenai user yang telah terdaftar."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Data User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b8f2f9ea-60c3-426b-a561-55d681ee4c75",
+						"exec": [
+							"pm.test(\"Berhasil memperbarui data pengguna\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Respon Benar\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Update user_kenny berhasil\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Jika Username atau API key tidak ada\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nama\" : \"dummy_kenny\",\r\n\t\"password\" : \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://restaurant-api-2020.herokuapp.com/api/user/updateProfile?apiKey={{api_key_kenny}}&username=user_kenny",
+					"protocol": "https",
+					"host": [
+						"restaurant-api-2020",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"updateProfile"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "{{api_key_kenny}}"
+						},
+						{
+							"key": "username",
+							"value": "user_kenny"
+						}
+					]
+				},
+				"description": "Memperbarui data akun pengguna.\r\n\r\nData yang dapat diubah mengenai pengguna adalah password,nama, dan foto profil.\r\nData yang akan diperbarui didasarkan dari data yang diberikan saat proses request. Misalnya jika hanya disediakan password maka yang akan diperbarui hanyalah password pengguna."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2608811b-fda7-4716-9af9-8d05bd5ed566",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "296ee172-16e1-4502-92e5-2e50e4726911",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "ba2f0752-dd56-4e05-bc39-cae5236c124b",
+			"key": "delete_id",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"id": "a523e311-a38a-47f2-a287-253b3b5ef008",
+			"key": "api_key_kenny",
+			"value": "tVRdhPh0ASZDNb97ZpInoBWQV1YLJf",
+			"type": "string"
 		}
 	],
 	"protocolProfileBehavior": {}

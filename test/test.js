@@ -389,10 +389,16 @@ describe('/api/collec/getAllCuisineinCity', () =>{
     });
 });
 
+<<<<<<< HEAD
 //joel
 describe('/api/user/loginUser', () =>{
     it('User Tidak Ada', (done)=>{
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+describe('/api/user/loginUser', () =>{
+    it('User Tidak Ada', (done)=>{
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .post('/api/user/buySubscriptioin?username=ax&password=ax')
             .send({
             })
@@ -406,7 +412,11 @@ describe('/api/user/loginUser', () =>{
 	});
 	
 	 it('Berhasil Login', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .post('/api/user/buySubscriptioin?username=freeuser&password=free')
             .send({
                 username:"freeuser"
@@ -423,7 +433,11 @@ describe('/api/user/loginUser', () =>{
 
 describe('/api/user/buySubscription', () =>{
     it('API key Invalid', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .post('/api/user/buySubscriptioin?apikey=')
             .send({
             })
@@ -437,7 +451,11 @@ describe('/api/user/buySubscription', () =>{
 	});
 	
 	 it('Sebagai Admin', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .post('/api/user/buySubscriptioin?apikey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1')
             .send({
                 username:"admin"
@@ -452,7 +470,11 @@ describe('/api/user/buySubscription', () =>{
 	});
 	
 	it('Tambah APIHIT', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .post('/api/user/buySubscriptioin?apikey=XRKtjahQS0r3RnmnHa3flh7pay1w4t')
             .send({
                 username:"testfreeuser2"
@@ -467,7 +489,11 @@ describe('/api/user/buySubscription', () =>{
 	});
 	
 	it('Saldo Tidak Cukup', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .post('/api/user/buySubscriptioin?apikey=V536uolnxOXrccmITUpFKHCRXXgSQN')
             .send({
                 username:"testinguserfree4"
@@ -484,7 +510,11 @@ describe('/api/user/buySubscription', () =>{
 
 describe('/api/user/deleteCollection', () =>{
     it('API key Invalid', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .delete('/api/user/buySubscriptioin?apikey=')
             .send({
             })
@@ -498,7 +528,11 @@ describe('/api/user/deleteCollection', () =>{
 	});
 	
 	 it('Sebagai Admin', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .delete('/api/user/buySubscriptioin?username=admin&password=admin&id=8')
             .send({
                 username:"admin"
@@ -513,7 +547,11 @@ describe('/api/user/deleteCollection', () =>{
     });
     
     it('Tidak dapat menemukan collection', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .delete('/api/user/buySubscriptioin?username=admin&password=admin&id=')
             .send({
                 username:"admin"
@@ -528,7 +566,11 @@ describe('/api/user/deleteCollection', () =>{
 	});
 	
 	it('User biasa', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .delete('/api/user/buySubscriptioin?username=testfreeuser2&password=testfree2&id=8')
             .send({
                 username:"testfreeuser2"
@@ -545,7 +587,11 @@ describe('/api/user/deleteCollection', () =>{
 
 describe('/api/user/editReview', () =>{
     it('API key Invalid', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .post('/api/user/buySubscriptioin?apikey=')
             .send({
             })
@@ -559,7 +605,11 @@ describe('/api/user/editReview', () =>{
 	});
 	
 	it('Ubah Review', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .post('/api/user/buySubscriptioin?username=freeuser&password=free&id=24')
             .send({
                 username:"freeuser"
@@ -574,7 +624,11 @@ describe('/api/user/editReview', () =>{
     });
     
     it('Ubah Review', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .post('/api/user/buySubscriptioin?username=freeuser&password=free&id=')
             .send({
                 username:"freeuser"
@@ -591,7 +645,11 @@ describe('/api/user/editReview', () =>{
 
 describe('/api/resto/getLocation', () =>{
     it('API key Invalid', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .get('/api/user/buySubscriptioin?apikey=')
             .send({
             })
@@ -605,7 +663,11 @@ describe('/api/resto/getLocation', () =>{
 	});
 	
 	it('Get Location Valid', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .gett('/api/resto/getLocation?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
             .send({
             })
@@ -617,7 +679,11 @@ describe('/api/resto/getLocation', () =>{
     });
     
     it('API Hit tidak cukup', (done)=>{
+<<<<<<< HEAD
         chai.request('http://restaurant-api-2020.herokuapp.com')
+=======
+        chai.request('http://localhost:4000')
+>>>>>>> 42f7c123fa6246923e3565ffa45be1f8fe4f7ff4
             .get('/api/review/getReview?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc')
             .send({
             })
