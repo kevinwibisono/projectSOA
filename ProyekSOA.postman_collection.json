@@ -135,9 +135,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/getUser?apiKey=p6sVF1x79Utkacw9ehwoFAmVC7Dq03",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/user/getUser?apiKey=p6sVF1x79Utkacw9ehwoFAmVC7Dq03",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -190,9 +193,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/getUser?apiKey=abcdefg",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/user/getUser?apiKey=abcdefg",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -245,9 +251,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/getUser?apiKey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1&username=abcdefg",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/user/getUser?apiKey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1&username=abcdefg",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -304,9 +313,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/getUser?apiKey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/user/getUser?apiKey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -364,9 +376,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/getUser?apiKey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1&username=freeuser",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/user/getUser?apiKey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1&username=freeuser",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -518,9 +533,12 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/getPremium?apiKey=abcdefg",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/user/getPremium?apiKey=abcdefg",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -573,9 +591,12 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/getPremium?apiKey=p6sVF1x79Utkacw9ehwoFAmVC7Dq03",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/user/getPremium?apiKey=p6sVF1x79Utkacw9ehwoFAmVC7Dq03",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -628,9 +649,12 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/getPremium?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/user/getPremium?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -683,9 +707,12 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/getPremium?apiKey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/user/getPremium?apiKey=6HTHhdHIGLpD4sjoCUJeSWpTjbPQd1",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -886,11 +913,13 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:3000/api/review/addReview?apiKey=p6sVF1x79Utkacw9ehwoFAmVC7Dq03",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/review/addReview?apiKey=p6sVF1x79Utkacw9ehwoFAmVC7Dq03",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"review",
@@ -957,11 +986,13 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:3000/api/review/addReview?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/review/addReview?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"review",
@@ -1028,9 +1059,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/review/addReview?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/review/addReview?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -1098,9 +1132,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/review/addReview?apiKey=",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/review/addReview?apiKey=",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -1168,9 +1205,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/review/addReview?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/review/addReview?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -1421,11 +1461,13 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:3000/api/collec/addCollection?apiKey=GfI2Y8CdpgCQPFrygAxK7vchY5eyF2",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/addCollection?apiKey=GfI2Y8CdpgCQPFrygAxK7vchY5eyF2",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"collec",
@@ -1502,11 +1544,13 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:3000/api/collec/addCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/addCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"collec",
@@ -1583,9 +1627,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/addCollection?apiKey=",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/addCollection?apiKey=",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -1663,9 +1710,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/addCollection?apiKey=tVRdhPh0ASZDNb97ZpInoBWQV1YLJf",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/addCollection?apiKey=tVRdhPh0ASZDNb97ZpInoBWQV1YLJf",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -1743,9 +1793,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/addCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/addCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -1823,9 +1876,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/addCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/addCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -1903,9 +1959,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/addCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/addCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -2188,9 +2247,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr&collectionId=4",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/updateCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr&collectionId=4",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -2272,9 +2334,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc&collectionId=4",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/updateCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc&collectionId=4",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -2356,9 +2421,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc&collectionId=9999",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/updateCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc&collectionId=9999",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -2440,9 +2508,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr&collectionId=4",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/updateCollection?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr&collectionId=4",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -2524,11 +2595,13 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:3000/api/collec/updateCollection?apiKey=GfI2Y8CdpgCQPFrygAxK7vchY5eyF2&collectionId=14",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/updateCollection?apiKey=GfI2Y8CdpgCQPFrygAxK7vchY5eyF2&collectionId=14",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"collec",
@@ -2609,11 +2682,13 @@
 							]
 						},
 						"url": {
-							"raw": "localhost:3000/api/collec/updateCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc&collectionId=13",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/updateCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc&collectionId=13",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"collec",
@@ -2694,9 +2769,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/updateCollection?apiKey=Lj6QJ441EEW1nbQZDjqvQYV8kMOVAc",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -2774,9 +2852,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/collec/updateCollection?apiKey=",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/collec/updateCollection?apiKey=",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -2946,9 +3027,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/user/topupSaldo?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/user/topupSaldo?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -3011,9 +3095,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/user/topupSaldo?apiKey=",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/user/topupSaldo?apiKey=",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -3076,9 +3163,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/user/topupSaldo?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"raw": "https://restaurant-api-2020.herokuapp.com/api/user/topupSaldo?apiKey=K8V17j5itJ3qQppBeFEY1oesQYoCPr",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"restaurant-api-2020",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
